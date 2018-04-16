@@ -1,148 +1,60 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ControladorManos : MonoBehaviour
+namespace Cross_Docking
 {
-    [SerializeField] private Mano derecha;
-    [SerializeField] private Mano izquierda;
-
-    [SerializeField] private FisicaMano fisicaDerecha;
-    [SerializeField] private FisicaMano fisicaIzquierda;
-
-    [SerializeField] private ControladorInput inputDerecho;
-    [SerializeField] private ControladorInput inputIzquierdo;
-
-    private Transform posicionDerecha;
-    private Transform posicionIzquierda;
-
-    private bool objetoEnMano;
-    private bool vectorManosAgregado;
-
-    private bool derechaCerrada;
-    private bool izquierdaCerrada;
-
-    private void Awake()
+    public class ControladorManos : MonoBehaviour
     {
-        posicionDerecha = fisicaDerecha.transform;
-        posicionIzquierda = fisicaIzquierda.transform;
+        [SerializeField] private Mano derecha;
+        [SerializeField] private Mano izquierda;
 
-        derecha.OnHandReady += VerificarManos;
-        izquierda.OnHandReady += VerificarManos;
-    }
+        private ControladorPosicionManos controladorPosicionManos;
 
-    private void Update()
-    {
-        VerificarInputsCerrar();
-        VerificarInputsAbrir();
-        VerificarAgarreObjeto();
-    }
+        private Transform posicionDerecha;
+        private Transform posicionIzquierda;
 
-    private void VerificarInputsCerrar()
-    {
-        //if (Input.GetKeyDown(KeyCode.R) && derechaCerrada == false)
-        if(inputDerecho.triggerPresionado && derechaCerrada == false)
+        private bool objetoEnMano;
+        private bool vectorManosAgregado;
+
+        private void Awake()
         {
-            derechaCerrada = true;
-            derecha.ActivarDedos();
+            controladorPosicionManos = GetComponent<ControladorPosicionManos>();
+            derecha.OnHandReady += VerificarManos;
+            izquierda.OnHandReady += VerificarManos;
         }
 
-        //if (Input.GetKeyDown(KeyCode.L) && izquierdaCerrada == false)
-        if(inputIzquierdo.triggerPresionado && izquierdaCerrada == false)
+        private void Update()
         {
-            izquierdaCerrada = true;
-            izquierda.ActivarDedos();
+            VerificarAgarreObjeto();
         }
-    }
 
-    private void VerificarInputsAbrir()
-    {
-        //if (Input.GetKeyUp(KeyCode.E) && derechaCerrada == true && objetoEnMano == true)
-        if (!inputDerecho.triggerPresionado && derechaCerrada == true && objetoEnMano == true)
+        private void VerificarManos(Interactible interactible)
         {
-            derechaCerrada = false;
-            SoltarDerecha();
-            derecha.NormalizarDedos();
-        }
-        //else if (Input.GetKeyUp(KeyCode.E) && derechaCerrada == true)
-        else if (!inputDerecho.triggerPresionado && derechaCerrada == true)
-        {
-            derechaCerrada = false;
-            derecha.NormalizarDedos();
-        }
-        //if (Input.GetKeyUp(KeyCode.K) && izquierdaCerrada == true && objetoEnMano == true)
-        if (!inputIzquierdo.triggerPresionado && izquierdaCerrada == true && objetoEnMano == true)
-        {
-            izquierdaCerrada = false;
-            SoltarIzquierda();
-            izquierda.NormalizarDedos();
-        }
-        //else if (Input.GetKeyUp(KeyCode.K) && izquierdaCerrada == true)
-        else if (!inputIzquierdo.triggerPresionado && izquierdaCerrada == true)
-        {
-            izquierdaCerrada = false;
-            izquierda.NormalizarDedos();
-        }
-    }
-
-    private void VerificarManos()
-    {
-        if (objetoEnMano == false && (derecha.manoLista && izquierda.manoLista))
-        {
-            if (fisicaDerecha.objetoTrigger == fisicaIzquierda.objetoTrigger)
+            if (objetoEnMano == false && (derecha.manoLista && izquierda.manoLista))
             {
-                DesactivarMano();
-                objetoEnMano = true;
+                if (derecha.objetoEnMano == izquierda.objetoEnMano)
+                {
+                    controladorPosicionManos.ActivarActualizacion(derecha.objetoEnMano.transform);
+                    objetoEnMano = true;
+                }
             }
         }
-    }
 
-    private void DesactivarMano()
-    {
-        if (!vectorManosAgregado)
+        private void VerificarAgarreObjeto()
         {
-            fisicaDerecha.AgarrarObjeto();
-            fisicaIzquierda.AgarrarObjeto();
-            vectorManosAgregado = true;
-        }
-    }
-
-    private void VerificarAgarreObjeto()
-    {
-        if (objetoEnMano)
-        {
-            Vector3 posDerecha = posicionDerecha.position;
-            Vector3 posIzquierda = posicionIzquierda.position;
-            if (Vector3.Distance(posDerecha, posIzquierda) > 3)
+            if (objetoEnMano)
             {
-                SoltarDerecha();
-                SoltarIzquierda();
+                Vector3 posDerecha = posicionDerecha.position;
+                Vector3 posIzquierda = posicionIzquierda.position;
+                if (Vector3.Distance(posDerecha, posIzquierda) > 1.5f)
+                {
+                    SoltarObjetoDobleMano();
+                }
             }
         }
-    }
 
-    private void SoltarDerecha()
-    {
-        derecha.ActivarCollidersDedos(false);
-        objetoEnMano = false;
-        if (vectorManosAgregado)
+        private void SoltarObjetoDobleMano()
         {
-            fisicaDerecha.SoltarObjeto();
-            fisicaIzquierda.SoltarObjeto();
-            vectorManosAgregado = false;
-        }
-        derecha.CambiarColorMano(Color.red);
-    }
 
-    private void SoltarIzquierda()
-    {
-        izquierda.ActivarCollidersDedos(false);
-        objetoEnMano = false;
-        if (vectorManosAgregado)
-        {
-            fisicaDerecha.SoltarObjeto();
-            fisicaIzquierda.SoltarObjeto();
-            vectorManosAgregado = false;
         }
-        izquierda.CambiarColorMano(Color.red);
     }
 }

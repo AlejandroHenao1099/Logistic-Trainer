@@ -1,93 +1,85 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
-public class Mano : MonoBehaviour
+namespace Cross_Docking
 {
-    public Action OnHandReady;
-
-    private TriggerDedo[] collidersTrigger = new TriggerDedo[5];
-    private Collider[] collidersDedos = new Collider[5];
-    private Dedo[] dedos = new Dedo[5];
-    private Renderer[] materialesMano;
-
-    private int[] indicesDedos = new int[5];
-    private int indiceDedoActual;
-
-    public bool manoLista { get; private set; }
-
-    private void Awake()
+    public class Mano : MonoBehaviour
     {
-        collidersTrigger = GetComponentsInChildren<TriggerDedo>();
-        materialesMano = GetComponentsInChildren<Renderer>();
-        dedos = GetComponentsInChildren<Dedo>();
-        AsignarAcciones();
-        CLonarCollider();
-        CambiarColorMano(Color.red);
-        ActivarCollidersDedos(false);
-    }
-
-    private void AsignarAcciones()
-    {
-        for (int i = 0; i < collidersTrigger.Length; i++)
-            collidersTrigger[i].OnTouch += VerificarToque;
-    }
-
-    private void CLonarCollider()
-    {
-        for (int i = 0; i < collidersTrigger.Length; i++)
-            collidersDedos[i] = collidersTrigger[i].GetComponent<Collider>();
-    }
-
-    public void ActivarDedos()
-    {
-        for (int i = 0; i < dedos.Length; i++)
-            dedos[i].Reproducir();
-        ActivarCollidersDedos(true);
-    }
-
-    public void NormalizarDedos()
-    {
-        ActivarCollidersDedos(false);
-        manoLista = false;
-        for (int i = 0; i < dedos.Length; i++)
-            dedos[i].ReanudarAnimator();
-        CambiarColorMano(Color.red);
-    }
-
-    private void VerificarToque(int indice)
-    {
-        indicesDedos[indiceDedoActual] = indice;
-        for (int i = 0; i < indicesDedos.Length; i++)
+        private enum TipoObjetoMano
         {
-            if (indicesDedos[i] != 0 && i == 3)
+            Ninguno, UnaMano, DosManos
+        }
+
+        private TipoObjetoMano tipoObjetoMano;
+        public Action<Interactible> OnHandReady;
+        private ControladorInput controladorInput;
+        public GameObject objetoEnMano { get; set; }
+
+        public bool manoLista { get; private set; }
+        private bool manoOcupada;
+
+        private void Awake()
+        {
+            controladorInput = GetComponent<ControladorInput>();
+        }
+
+        private void Update()
+        {
+            if (manoOcupada == true && controladorInput.triggerPresionado == false)
+                if (tipoObjetoMano == TipoObjetoMano.UnaMano)
+                    SoltarObjeto();
+
+        }
+
+        private void EstablecerTipoObjetoDobleMano(Interactible interactible)
+        {
+            AgarrarObjeto(interactible.gameObject);
+        }
+
+        private void EstablecerTipoObjetoIndividual(Interactible interactible)
+        {
+            manoLista = true;
+            objetoEnMano = interactible.gameObject;
+            OnHandReady(interactible);
+        }
+
+        private void AgarrarObjeto(GameObject objeto)
+        {
+            FixedJoint fixedJoint = gameObject.AddComponent<FixedJoint>();
+            fixedJoint.connectedBody = objeto.GetComponent<Rigidbody>();
+            fixedJoint.breakForce = 20000f;
+            fixedJoint.breakTorque = 20000f;
+            manoOcupada = true;
+            tipoObjetoMano = TipoObjetoMano.UnaMano;
+        }
+
+        private void SoltarObjeto()
+        {
+            FixedJoint fixedJoint = gameObject.GetComponent<FixedJoint>();
+            Rigidbody rigObjeto = fixedJoint.connectedBody;
+            Rigidbody rigMano = GetComponent<Rigidbody>();
+            Destroy(fixedJoint);
+
+            rigObjeto.velocity = rigMano.velocity;
+            rigObjeto.angularVelocity = rigMano.angularVelocity;
+            manoOcupada = false;
+            tipoObjetoMano = TipoObjetoMano.Ninguno;
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (manoOcupada == false)
             {
-                StartCoroutine(RetrasoMano());
-                return;
+                if (controladorInput.triggerPresionado == true)
+                {
+                    Interactible interactible = other.transform.GetComponent<Interactible>();
+
+                    if (interactible != null && interactible.agarreDobleMano == true)
+                        EstablecerTipoObjetoDobleMano(interactible);
+                    else if (interactible != null && interactible.agarreDobleMano == false)
+                        EstablecerTipoObjetoIndividual(interactible);
+                }
             }
         }
-        indiceDedoActual++;
-    }
-
-    private IEnumerator RetrasoMano()
-    {
-        yield return new WaitForSeconds(0.15f);
-        manoLista = true;
-        CambiarColorMano(Color.green);
-        if (OnHandReady != null)
-            OnHandReady();
-        indiceDedoActual = 0;
-    }
-
-    public void CambiarColorMano(Color colorCambio)
-    {
-        for (int i = 0; i < materialesMano.Length; i++)
-            materialesMano[i].material.color = colorCambio;
-    }
-
-    public void ActivarCollidersDedos(bool estadoActual)
-    {
-        for (int i = 0; i < collidersDedos.Length; i++)
-            collidersDedos[i].enabled = estadoActual;
     }
 }
