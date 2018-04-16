@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: b31fc2049cfa3c041be8a516b5053ffe
+timeCreated: 1512138635
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: BadlyStamped
+  fontNames:
+  - BadlyStamped
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: db436c6fdbd53ca45873e9b053598f19, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
