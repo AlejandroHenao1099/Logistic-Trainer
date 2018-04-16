@@ -1,0 +1,1311 @@
+fileFormatVersion: 2
+guid: 2921ebe3839e18445b5924e275321221
+timeCreated: 1509727755
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: barra
+    100002: barras_inferiores
+    100004: borde
+    100006: caja
+    100008: //RootNode
+    100010: camion
+    100012: camiones
+    100014: carroseria
+    100016: Ctrl_puerta_derch
+    100018: Ctrl_puerta_izq
+    100020: derecha
+    100022: detalles
+    100024: direccionales
+    100026: inferior
+    100028: izquierda
+    100030: llantas
+    100032: otros
+    100034: plastico
+    100036: polySurface577
+    100038: puerta_derc
+    100040: puerta_derec
+    100042: puerta_izq
+    100044: puerta_izq 1
+    100046: retrovisores
+    100048: Rines
+    100050: rudeas
+    100052: Ruedas_delanteras
+    100054: Ruedas_traseras
+    100056: taparudea
+    100058: vidrios
+    100060: barra 1
+    100062: barra 10
+    100064: barra 11
+    100066: barra 2
+    100068: barra 3
+    100070: barra 4
+    100072: barra 5
+    100074: barra 6
+    100076: barra 7
+    100078: barra 8
+    100080: barra 9
+    100082: barras_inferiores 1
+    100084: barras_inferiores 10
+    100086: barras_inferiores 11
+    100088: barras_inferiores 2
+    100090: barras_inferiores 3
+    100092: barras_inferiores 4
+    100094: barras_inferiores 5
+    100096: barras_inferiores 6
+    100098: barras_inferiores 7
+    100100: barras_inferiores 8
+    100102: barras_inferiores 9
+    100104: borde 1
+    100106: borde 10
+    100108: borde 11
+    100110: borde 2
+    100112: borde 3
+    100114: borde 4
+    100116: borde 5
+    100118: borde 6
+    100120: borde 7
+    100122: borde 8
+    100124: borde 9
+    100126: caja 1
+    100128: caja 10
+    100130: caja 11
+    100132: caja 2
+    100134: caja 3
+    100136: caja 4
+    100138: caja 5
+    100140: caja 6
+    100142: caja 7
+    100144: caja 8
+    100146: caja 9
+    100148: camion1
+    100150: camion10
+    100152: camion11
+    100154: camion2
+    100156: camion3
+    100158: camion4
+    100160: camion5
+    100162: camion6
+    100164: camion7
+    100166: camion8
+    100168: camion9
+    100170: carroseria 1
+    100172: carroseria 10
+    100174: carroseria 11
+    100176: carroseria 2
+    100178: carroseria 3
+    100180: carroseria 4
+    100182: carroseria 5
+    100184: carroseria 6
+    100186: carroseria 7
+    100188: carroseria 8
+    100190: carroseria 9
+    100192: detalles 1
+    100194: detalles 10
+    100196: detalles 11
+    100198: detalles 2
+    100200: detalles 3
+    100202: detalles 4
+    100204: detalles 5
+    100206: detalles 6
+    100208: detalles 7
+    100210: detalles 8
+    100212: detalles 9
+    100214: direccionales 1
+    100216: direccionales 10
+    100218: direccionales 11
+    100220: direccionales 2
+    100222: direccionales 3
+    100224: direccionales 4
+    100226: direccionales 5
+    100228: direccionales 6
+    100230: direccionales 7
+    100232: direccionales 8
+    100234: direccionales 9
+    100236: inferior 1
+    100238: inferior 10
+    100240: inferior 11
+    100242: inferior 2
+    100244: inferior 3
+    100246: inferior 4
+    100248: inferior 5
+    100250: inferior 6
+    100252: inferior 7
+    100254: inferior 8
+    100256: inferior 9
+    100258: joint1
+    100260: joint1 1
+    100262: joint1 10
+    100264: joint1 2
+    100266: joint1 3
+    100268: joint1 4
+    100270: joint1 5
+    100272: joint1 6
+    100274: joint1 7
+    100276: joint1 8
+    100278: joint1 9
+    100280: joint2
+    100282: joint2 1
+    100284: joint2 10
+    100286: joint2 2
+    100288: joint2 3
+    100290: joint2 4
+    100292: joint2 5
+    100294: joint2 6
+    100296: joint2 7
+    100298: joint2 8
+    100300: joint2 9
+    100302: llantas 1
+    100304: llantas 10
+    100306: llantas 11
+    100308: llantas 2
+    100310: llantas 3
+    100312: llantas 4
+    100314: llantas 5
+    100316: llantas 6
+    100318: llantas 7
+    100320: llantas 8
+    100322: llantas 9
+    100324: otros 1
+    100326: otros 10
+    100328: otros 11
+    100330: otros 2
+    100332: otros 3
+    100334: otros 4
+    100336: otros 5
+    100338: otros 6
+    100340: otros 7
+    100342: otros 8
+    100344: otros 9
+    100346: plastico 1
+    100348: plastico 10
+    100350: plastico 11
+    100352: plastico 2
+    100354: plastico 3
+    100356: plastico 4
+    100358: plastico 5
+    100360: plastico 6
+    100362: plastico 7
+    100364: plastico 8
+    100366: plastico 9
+    100368: polySurface577 1
+    100370: polySurface577 10
+    100372: polySurface577 11
+    100374: polySurface577 2
+    100376: polySurface577 3
+    100378: polySurface577 4
+    100380: polySurface577 5
+    100382: polySurface577 6
+    100384: polySurface577 7
+    100386: polySurface577 8
+    100388: polySurface577 9
+    100390: puerta_derc 1
+    100392: puerta_derc 10
+    100394: puerta_derc 11
+    100396: puerta_derc 2
+    100398: puerta_derc 3
+    100400: puerta_derc 4
+    100402: puerta_derc 5
+    100404: puerta_derc 6
+    100406: puerta_derc 7
+    100408: puerta_derc 8
+    100410: puerta_derc 9
+    100412: puerta_derec 1
+    100414: puerta_derec 10
+    100416: puerta_derec 11
+    100418: puerta_derec 2
+    100420: puerta_derec 3
+    100422: puerta_derec 4
+    100424: puerta_derec 5
+    100426: puerta_derec 6
+    100428: puerta_derec 7
+    100430: puerta_derec 8
+    100432: puerta_derec 9
+    100434: puerta_Drc
+    100436: puerta_Drc 1
+    100438: puerta_Drc 10
+    100440: puerta_Drc 2
+    100442: puerta_Drc 3
+    100444: puerta_Drc 4
+    100446: puerta_Drc 5
+    100448: puerta_Drc 6
+    100450: puerta_Drc 7
+    100452: puerta_Drc 8
+    100454: puerta_Drc 9
+    100456: Puerta_Izq
+    100458: Puerta_Izq 1
+    100460: Puerta_Izq 10
+    100462: puerta_izq 10
+    100464: puerta_izq 11
+    100466: puerta_izq 12
+    100468: puerta_izq 13
+    100470: puerta_izq 14
+    100472: puerta_izq 15
+    100474: puerta_izq 16
+    100476: puerta_izq 17
+    100478: puerta_izq 18
+    100480: puerta_izq 19
+    100482: Puerta_Izq 2
+    100484: puerta_izq 2
+    100486: puerta_izq 20
+    100488: puerta_izq 21
+    100490: puerta_izq 22
+    100492: puerta_izq 23
+    100494: Puerta_Izq 3
+    100496: puerta_izq 3
+    100498: Puerta_Izq 4
+    100500: puerta_izq 4
+    100502: Puerta_Izq 5
+    100504: puerta_izq 5
+    100506: Puerta_Izq 6
+    100508: puerta_izq 6
+    100510: Puerta_Izq 7
+    100512: puerta_izq 7
+    100514: Puerta_Izq 8
+    100516: puerta_izq 8
+    100518: Puerta_Izq 9
+    100520: puerta_izq 9
+    100522: retrovisores 1
+    100524: retrovisores 10
+    100526: retrovisores 11
+    100528: retrovisores 2
+    100530: retrovisores 3
+    100532: retrovisores 4
+    100534: retrovisores 5
+    100536: retrovisores 6
+    100538: retrovisores 7
+    100540: retrovisores 8
+    100542: retrovisores 9
+    100544: taparudea 1
+    100546: taparudea 10
+    100548: taparudea 11
+    100550: taparudea 2
+    100552: taparudea 3
+    100554: taparudea 4
+    100556: taparudea 5
+    100558: taparudea 6
+    100560: taparudea 7
+    100562: taparudea 8
+    100564: taparudea 9
+    100566: transform1
+    100568: transform1 1
+    100570: transform1 10
+    100572: transform1 2
+    100574: transform1 3
+    100576: transform1 4
+    100578: transform1 5
+    100580: transform1 6
+    100582: transform1 7
+    100584: transform1 8
+    100586: transform1 9
+    100588: vidrios 1
+    100590: vidrios 10
+    100592: vidrios 11
+    100594: vidrios 2
+    100596: vidrios 3
+    100598: vidrios 4
+    100600: vidrios 5
+    100602: vidrios 6
+    100604: vidrios 7
+    100606: vidrios 8
+    100608: vidrios 9
+    100610: Ctrl_Puerta_Derch
+    100612: Ctrl_Puerta_Izq
+    100614: mesh
+    100616: pCube1
+    100618: Ctrl_Ruedas_Traseras
+    100620: Ctrl_Rueda_Derch
+    100622: Ctrl_Rueda_Izq
+    400000: barra
+    400002: barras_inferiores
+    400004: borde
+    400006: caja
+    400008: //RootNode
+    400010: camion
+    400012: camiones
+    400014: carroseria
+    400016: Ctrl_puerta_derch
+    400018: Ctrl_puerta_izq
+    400020: derecha
+    400022: detalles
+    400024: direccionales
+    400026: inferior
+    400028: izquierda
+    400030: llantas
+    400032: otros
+    400034: plastico
+    400036: polySurface577
+    400038: puerta_derc
+    400040: puerta_derec
+    400042: puerta_izq
+    400044: puerta_izq 1
+    400046: retrovisores
+    400048: Rines
+    400050: rudeas
+    400052: Ruedas_delanteras
+    400054: Ruedas_traseras
+    400056: taparudea
+    400058: vidrios
+    400060: barra 1
+    400062: barra 10
+    400064: barra 11
+    400066: barra 2
+    400068: barra 3
+    400070: barra 4
+    400072: barra 5
+    400074: barra 6
+    400076: barra 7
+    400078: barra 8
+    400080: barra 9
+    400082: barras_inferiores 1
+    400084: barras_inferiores 10
+    400086: barras_inferiores 11
+    400088: barras_inferiores 2
+    400090: barras_inferiores 3
+    400092: barras_inferiores 4
+    400094: barras_inferiores 5
+    400096: barras_inferiores 6
+    400098: barras_inferiores 7
+    400100: barras_inferiores 8
+    400102: barras_inferiores 9
+    400104: borde 1
+    400106: borde 10
+    400108: borde 11
+    400110: borde 2
+    400112: borde 3
+    400114: borde 4
+    400116: borde 5
+    400118: borde 6
+    400120: borde 7
+    400122: borde 8
+    400124: borde 9
+    400126: caja 1
+    400128: caja 10
+    400130: caja 11
+    400132: caja 2
+    400134: caja 3
+    400136: caja 4
+    400138: caja 5
+    400140: caja 6
+    400142: caja 7
+    400144: caja 8
+    400146: caja 9
+    400148: camion1
+    400150: camion10
+    400152: camion11
+    400154: camion2
+    400156: camion3
+    400158: camion4
+    400160: camion5
+    400162: camion6
+    400164: camion7
+    400166: camion8
+    400168: camion9
+    400170: carroseria 1
+    400172: carroseria 10
+    400174: carroseria 11
+    400176: carroseria 2
+    400178: carroseria 3
+    400180: carroseria 4
+    400182: carroseria 5
+    400184: carroseria 6
+    400186: carroseria 7
+    400188: carroseria 8
+    400190: carroseria 9
+    400192: detalles 1
+    400194: detalles 10
+    400196: detalles 11
+    400198: detalles 2
+    400200: detalles 3
+    400202: detalles 4
+    400204: detalles 5
+    400206: detalles 6
+    400208: detalles 7
+    400210: detalles 8
+    400212: detalles 9
+    400214: direccionales 1
+    400216: direccionales 10
+    400218: direccionales 11
+    400220: direccionales 2
+    400222: direccionales 3
+    400224: direccionales 4
+    400226: direccionales 5
+    400228: direccionales 6
+    400230: direccionales 7
+    400232: direccionales 8
+    400234: direccionales 9
+    400236: inferior 1
+    400238: inferior 10
+    400240: inferior 11
+    400242: inferior 2
+    400244: inferior 3
+    400246: inferior 4
+    400248: inferior 5
+    400250: inferior 6
+    400252: inferior 7
+    400254: inferior 8
+    400256: inferior 9
+    400258: joint1
+    400260: joint1 1
+    400262: joint1 10
+    400264: joint1 2
+    400266: joint1 3
+    400268: joint1 4
+    400270: joint1 5
+    400272: joint1 6
+    400274: joint1 7
+    400276: joint1 8
+    400278: joint1 9
+    400280: joint2
+    400282: joint2 1
+    400284: joint2 10
+    400286: joint2 2
+    400288: joint2 3
+    400290: joint2 4
+    400292: joint2 5
+    400294: joint2 6
+    400296: joint2 7
+    400298: joint2 8
+    400300: joint2 9
+    400302: llantas 1
+    400304: llantas 10
+    400306: llantas 11
+    400308: llantas 2
+    400310: llantas 3
+    400312: llantas 4
+    400314: llantas 5
+    400316: llantas 6
+    400318: llantas 7
+    400320: llantas 8
+    400322: llantas 9
+    400324: otros 1
+    400326: otros 10
+    400328: otros 11
+    400330: otros 2
+    400332: otros 3
+    400334: otros 4
+    400336: otros 5
+    400338: otros 6
+    400340: otros 7
+    400342: otros 8
+    400344: otros 9
+    400346: plastico 1
+    400348: plastico 10
+    400350: plastico 11
+    400352: plastico 2
+    400354: plastico 3
+    400356: plastico 4
+    400358: plastico 5
+    400360: plastico 6
+    400362: plastico 7
+    400364: plastico 8
+    400366: plastico 9
+    400368: polySurface577 1
+    400370: polySurface577 10
+    400372: polySurface577 11
+    400374: polySurface577 2
+    400376: polySurface577 3
+    400378: polySurface577 4
+    400380: polySurface577 5
+    400382: polySurface577 6
+    400384: polySurface577 7
+    400386: polySurface577 8
+    400388: polySurface577 9
+    400390: puerta_derc 1
+    400392: puerta_derc 10
+    400394: puerta_derc 11
+    400396: puerta_derc 2
+    400398: puerta_derc 3
+    400400: puerta_derc 4
+    400402: puerta_derc 5
+    400404: puerta_derc 6
+    400406: puerta_derc 7
+    400408: puerta_derc 8
+    400410: puerta_derc 9
+    400412: puerta_derec 1
+    400414: puerta_derec 10
+    400416: puerta_derec 11
+    400418: puerta_derec 2
+    400420: puerta_derec 3
+    400422: puerta_derec 4
+    400424: puerta_derec 5
+    400426: puerta_derec 6
+    400428: puerta_derec 7
+    400430: puerta_derec 8
+    400432: puerta_derec 9
+    400434: puerta_Drc
+    400436: puerta_Drc 1
+    400438: puerta_Drc 10
+    400440: puerta_Drc 2
+    400442: puerta_Drc 3
+    400444: puerta_Drc 4
+    400446: puerta_Drc 5
+    400448: puerta_Drc 6
+    400450: puerta_Drc 7
+    400452: puerta_Drc 8
+    400454: puerta_Drc 9
+    400456: Puerta_Izq
+    400458: Puerta_Izq 1
+    400460: Puerta_Izq 10
+    400462: puerta_izq 10
+    400464: puerta_izq 11
+    400466: puerta_izq 12
+    400468: puerta_izq 13
+    400470: puerta_izq 14
+    400472: puerta_izq 15
+    400474: puerta_izq 16
+    400476: puerta_izq 17
+    400478: puerta_izq 18
+    400480: puerta_izq 19
+    400482: Puerta_Izq 2
+    400484: puerta_izq 2
+    400486: puerta_izq 20
+    400488: puerta_izq 21
+    400490: puerta_izq 22
+    400492: puerta_izq 23
+    400494: Puerta_Izq 3
+    400496: puerta_izq 3
+    400498: Puerta_Izq 4
+    400500: puerta_izq 4
+    400502: Puerta_Izq 5
+    400504: puerta_izq 5
+    400506: Puerta_Izq 6
+    400508: puerta_izq 6
+    400510: Puerta_Izq 7
+    400512: puerta_izq 7
+    400514: Puerta_Izq 8
+    400516: puerta_izq 8
+    400518: Puerta_Izq 9
+    400520: puerta_izq 9
+    400522: retrovisores 1
+    400524: retrovisores 10
+    400526: retrovisores 11
+    400528: retrovisores 2
+    400530: retrovisores 3
+    400532: retrovisores 4
+    400534: retrovisores 5
+    400536: retrovisores 6
+    400538: retrovisores 7
+    400540: retrovisores 8
+    400542: retrovisores 9
+    400544: taparudea 1
+    400546: taparudea 10
+    400548: taparudea 11
+    400550: taparudea 2
+    400552: taparudea 3
+    400554: taparudea 4
+    400556: taparudea 5
+    400558: taparudea 6
+    400560: taparudea 7
+    400562: taparudea 8
+    400564: taparudea 9
+    400566: transform1
+    400568: transform1 1
+    400570: transform1 10
+    400572: transform1 2
+    400574: transform1 3
+    400576: transform1 4
+    400578: transform1 5
+    400580: transform1 6
+    400582: transform1 7
+    400584: transform1 8
+    400586: transform1 9
+    400588: vidrios 1
+    400590: vidrios 10
+    400592: vidrios 11
+    400594: vidrios 2
+    400596: vidrios 3
+    400598: vidrios 4
+    400600: vidrios 5
+    400602: vidrios 6
+    400604: vidrios 7
+    400606: vidrios 8
+    400608: vidrios 9
+    400610: Ctrl_Puerta_Derch
+    400612: Ctrl_Puerta_Izq
+    400614: mesh
+    400616: pCube1
+    400618: Ctrl_Ruedas_Traseras
+    400620: Ctrl_Rueda_Derch
+    400622: Ctrl_Rueda_Izq
+    2300000: barras_inferiores
+    2300002: borde
+    2300004: caja
+    2300006: carroseria
+    2300008: derecha
+    2300010: detalles
+    2300012: direccionales
+    2300014: inferior
+    2300016: izquierda
+    2300018: llantas
+    2300020: otros
+    2300022: plastico
+    2300024: retrovisores
+    2300026: Rines
+    2300028: taparudea
+    2300030: vidrios
+    2300032: barra 10
+    2300034: barra 11
+    2300036: barra 6
+    2300038: barra 7
+    2300040: barra 8
+    2300042: barra 9
+    2300044: barras_inferiores 1
+    2300046: barras_inferiores 10
+    2300048: barras_inferiores 11
+    2300050: barras_inferiores 2
+    2300052: barras_inferiores 3
+    2300054: barras_inferiores 4
+    2300056: barras_inferiores 5
+    2300058: barras_inferiores 6
+    2300060: barras_inferiores 7
+    2300062: barras_inferiores 8
+    2300064: barras_inferiores 9
+    2300066: borde 1
+    2300068: borde 10
+    2300070: borde 11
+    2300072: borde 2
+    2300074: borde 3
+    2300076: borde 4
+    2300078: borde 5
+    2300080: borde 6
+    2300082: borde 7
+    2300084: borde 8
+    2300086: borde 9
+    2300088: caja 1
+    2300090: caja 10
+    2300092: caja 11
+    2300094: caja 2
+    2300096: caja 3
+    2300098: caja 4
+    2300100: caja 5
+    2300102: caja 6
+    2300104: caja 7
+    2300106: caja 8
+    2300108: caja 9
+    2300110: carroseria 1
+    2300112: carroseria 10
+    2300114: carroseria 11
+    2300116: carroseria 2
+    2300118: carroseria 3
+    2300120: carroseria 4
+    2300122: carroseria 5
+    2300124: carroseria 6
+    2300126: carroseria 7
+    2300128: carroseria 8
+    2300130: carroseria 9
+    2300132: detalles 1
+    2300134: detalles 10
+    2300136: detalles 11
+    2300138: detalles 2
+    2300140: detalles 3
+    2300142: detalles 4
+    2300144: detalles 5
+    2300146: detalles 6
+    2300148: detalles 7
+    2300150: detalles 8
+    2300152: detalles 9
+    2300154: direccionales 1
+    2300156: direccionales 10
+    2300158: direccionales 11
+    2300160: direccionales 2
+    2300162: direccionales 3
+    2300164: direccionales 4
+    2300166: direccionales 5
+    2300168: direccionales 6
+    2300170: direccionales 7
+    2300172: direccionales 8
+    2300174: direccionales 9
+    2300176: inferior 1
+    2300178: inferior 10
+    2300180: inferior 11
+    2300182: inferior 2
+    2300184: inferior 3
+    2300186: inferior 4
+    2300188: inferior 5
+    2300190: inferior 6
+    2300192: inferior 7
+    2300194: inferior 8
+    2300196: inferior 9
+    2300198: llantas 1
+    2300200: llantas 10
+    2300202: llantas 11
+    2300204: llantas 2
+    2300206: llantas 3
+    2300208: llantas 4
+    2300210: llantas 5
+    2300212: llantas 6
+    2300214: llantas 7
+    2300216: llantas 8
+    2300218: llantas 9
+    2300220: otros 1
+    2300222: otros 10
+    2300224: otros 11
+    2300226: otros 2
+    2300228: otros 3
+    2300230: otros 4
+    2300232: otros 5
+    2300234: otros 6
+    2300236: otros 7
+    2300238: otros 8
+    2300240: otros 9
+    2300242: plastico 1
+    2300244: plastico 10
+    2300246: plastico 11
+    2300248: plastico 2
+    2300250: plastico 3
+    2300252: plastico 4
+    2300254: plastico 5
+    2300256: plastico 6
+    2300258: plastico 7
+    2300260: plastico 8
+    2300262: plastico 9
+    2300264: polySurface577 10
+    2300266: polySurface577 11
+    2300268: polySurface577 6
+    2300270: polySurface577 7
+    2300272: polySurface577 8
+    2300274: polySurface577 9
+    2300276: puerta_derc 10
+    2300278: puerta_derc 11
+    2300280: puerta_derc 6
+    2300282: puerta_derc 7
+    2300284: puerta_derc 8
+    2300286: puerta_derc 9
+    2300288: puerta_izq 18
+    2300290: puerta_izq 19
+    2300292: puerta_izq 20
+    2300294: puerta_izq 21
+    2300296: puerta_izq 22
+    2300298: puerta_izq 23
+    2300300: retrovisores 1
+    2300302: retrovisores 10
+    2300304: retrovisores 11
+    2300306: retrovisores 2
+    2300308: retrovisores 3
+    2300310: retrovisores 4
+    2300312: retrovisores 5
+    2300314: retrovisores 6
+    2300316: retrovisores 7
+    2300318: retrovisores 8
+    2300320: retrovisores 9
+    2300322: taparudea 1
+    2300324: taparudea 10
+    2300326: taparudea 11
+    2300328: taparudea 2
+    2300330: taparudea 3
+    2300332: taparudea 4
+    2300334: taparudea 5
+    2300336: taparudea 6
+    2300338: taparudea 7
+    2300340: taparudea 8
+    2300342: taparudea 9
+    2300344: vidrios 1
+    2300346: vidrios 10
+    2300348: vidrios 11
+    2300350: vidrios 2
+    2300352: vidrios 3
+    2300354: vidrios 4
+    2300356: vidrios 5
+    2300358: vidrios 6
+    2300360: vidrios 7
+    2300362: vidrios 8
+    2300364: vidrios 9
+    2300366: pCube1
+    3300000: barras_inferiores
+    3300002: borde
+    3300004: caja
+    3300006: carroseria
+    3300008: derecha
+    3300010: detalles
+    3300012: direccionales
+    3300014: inferior
+    3300016: izquierda
+    3300018: llantas
+    3300020: otros
+    3300022: plastico
+    3300024: retrovisores
+    3300026: Rines
+    3300028: taparudea
+    3300030: vidrios
+    3300032: barra 10
+    3300034: barra 11
+    3300036: barra 6
+    3300038: barra 7
+    3300040: barra 8
+    3300042: barra 9
+    3300044: barras_inferiores 1
+    3300046: barras_inferiores 10
+    3300048: barras_inferiores 11
+    3300050: barras_inferiores 2
+    3300052: barras_inferiores 3
+    3300054: barras_inferiores 4
+    3300056: barras_inferiores 5
+    3300058: barras_inferiores 6
+    3300060: barras_inferiores 7
+    3300062: barras_inferiores 8
+    3300064: barras_inferiores 9
+    3300066: borde 1
+    3300068: borde 10
+    3300070: borde 11
+    3300072: borde 2
+    3300074: borde 3
+    3300076: borde 4
+    3300078: borde 5
+    3300080: borde 6
+    3300082: borde 7
+    3300084: borde 8
+    3300086: borde 9
+    3300088: caja 1
+    3300090: caja 10
+    3300092: caja 11
+    3300094: caja 2
+    3300096: caja 3
+    3300098: caja 4
+    3300100: caja 5
+    3300102: caja 6
+    3300104: caja 7
+    3300106: caja 8
+    3300108: caja 9
+    3300110: carroseria 1
+    3300112: carroseria 10
+    3300114: carroseria 11
+    3300116: carroseria 2
+    3300118: carroseria 3
+    3300120: carroseria 4
+    3300122: carroseria 5
+    3300124: carroseria 6
+    3300126: carroseria 7
+    3300128: carroseria 8
+    3300130: carroseria 9
+    3300132: detalles 1
+    3300134: detalles 10
+    3300136: detalles 11
+    3300138: detalles 2
+    3300140: detalles 3
+    3300142: detalles 4
+    3300144: detalles 5
+    3300146: detalles 6
+    3300148: detalles 7
+    3300150: detalles 8
+    3300152: detalles 9
+    3300154: direccionales 1
+    3300156: direccionales 10
+    3300158: direccionales 11
+    3300160: direccionales 2
+    3300162: direccionales 3
+    3300164: direccionales 4
+    3300166: direccionales 5
+    3300168: direccionales 6
+    3300170: direccionales 7
+    3300172: direccionales 8
+    3300174: direccionales 9
+    3300176: inferior 1
+    3300178: inferior 10
+    3300180: inferior 11
+    3300182: inferior 2
+    3300184: inferior 3
+    3300186: inferior 4
+    3300188: inferior 5
+    3300190: inferior 6
+    3300192: inferior 7
+    3300194: inferior 8
+    3300196: inferior 9
+    3300198: llantas 1
+    3300200: llantas 10
+    3300202: llantas 11
+    3300204: llantas 2
+    3300206: llantas 3
+    3300208: llantas 4
+    3300210: llantas 5
+    3300212: llantas 6
+    3300214: llantas 7
+    3300216: llantas 8
+    3300218: llantas 9
+    3300220: otros 1
+    3300222: otros 10
+    3300224: otros 11
+    3300226: otros 2
+    3300228: otros 3
+    3300230: otros 4
+    3300232: otros 5
+    3300234: otros 6
+    3300236: otros 7
+    3300238: otros 8
+    3300240: otros 9
+    3300242: plastico 1
+    3300244: plastico 10
+    3300246: plastico 11
+    3300248: plastico 2
+    3300250: plastico 3
+    3300252: plastico 4
+    3300254: plastico 5
+    3300256: plastico 6
+    3300258: plastico 7
+    3300260: plastico 8
+    3300262: plastico 9
+    3300264: polySurface577 10
+    3300266: polySurface577 11
+    3300268: polySurface577 6
+    3300270: polySurface577 7
+    3300272: polySurface577 8
+    3300274: polySurface577 9
+    3300276: puerta_derc 10
+    3300278: puerta_derc 11
+    3300280: puerta_derc 6
+    3300282: puerta_derc 7
+    3300284: puerta_derc 8
+    3300286: puerta_derc 9
+    3300288: puerta_izq 18
+    3300290: puerta_izq 19
+    3300292: puerta_izq 20
+    3300294: puerta_izq 21
+    3300296: puerta_izq 22
+    3300298: puerta_izq 23
+    3300300: retrovisores 1
+    3300302: retrovisores 10
+    3300304: retrovisores 11
+    3300306: retrovisores 2
+    3300308: retrovisores 3
+    3300310: retrovisores 4
+    3300312: retrovisores 5
+    3300314: retrovisores 6
+    3300316: retrovisores 7
+    3300318: retrovisores 8
+    3300320: retrovisores 9
+    3300322: taparudea 1
+    3300324: taparudea 10
+    3300326: taparudea 11
+    3300328: taparudea 2
+    3300330: taparudea 3
+    3300332: taparudea 4
+    3300334: taparudea 5
+    3300336: taparudea 6
+    3300338: taparudea 7
+    3300340: taparudea 8
+    3300342: taparudea 9
+    3300344: vidrios 1
+    3300346: vidrios 10
+    3300348: vidrios 11
+    3300350: vidrios 2
+    3300352: vidrios 3
+    3300354: vidrios 4
+    3300356: vidrios 5
+    3300358: vidrios 6
+    3300360: vidrios 7
+    3300362: vidrios 8
+    3300364: vidrios 9
+    3300366: pCube1
+    4300000: barras_inferiores
+    4300002: carroseria
+    4300004: detalles
+    4300006: inferior
+    4300008: direccionales
+    4300010: otros
+    4300012: plastico
+    4300014: retrovisores
+    4300016: taparudea
+    4300018: vidrios
+    4300020: caja
+    4300022: borde
+    4300024: puerta_derc
+    4300026: barra
+    4300028: polySurface577
+    4300030: puerta_izq
+    4300032: derecha
+    4300034: izquierda
+    4300036: Rines
+    4300038: llantas
+    4300040: barras_inferiores
+    4300042: carroseria
+    4300044: detalles
+    4300046: inferior
+    4300048: direccionales
+    4300050: llantas
+    4300052: otros
+    4300054: plastico
+    4300056: retrovisores
+    4300058: taparudea
+    4300060: vidrios
+    4300062: caja
+    4300064: borde
+    4300066: puerta_derc
+    4300068: barra
+    4300070: polySurface577
+    4300072: puerta_izq
+    4300074: barras_inferiores
+    4300076: carroseria
+    4300078: detalles
+    4300080: inferior
+    4300082: direccionales
+    4300084: llantas
+    4300086: otros
+    4300088: plastico
+    4300090: retrovisores
+    4300092: taparudea
+    4300094: vidrios
+    4300096: caja
+    4300098: borde
+    4300100: puerta_derc
+    4300102: barra
+    4300104: polySurface577
+    4300106: puerta_izq
+    4300108: barras_inferiores
+    4300110: carroseria
+    4300112: detalles
+    4300114: inferior
+    4300116: direccionales
+    4300118: llantas
+    4300120: otros
+    4300122: plastico
+    4300124: retrovisores
+    4300126: taparudea
+    4300128: vidrios
+    4300130: caja
+    4300132: borde
+    4300134: puerta_derc
+    4300136: barra
+    4300138: polySurface577
+    4300140: puerta_izq
+    4300142: barras_inferiores
+    4300144: carroseria
+    4300146: detalles
+    4300148: inferior
+    4300150: direccionales
+    4300152: llantas
+    4300154: otros
+    4300156: plastico
+    4300158: retrovisores
+    4300160: taparudea
+    4300162: vidrios
+    4300164: caja
+    4300166: borde
+    4300168: puerta_derc
+    4300170: barra
+    4300172: polySurface577
+    4300174: puerta_izq
+    4300176: barras_inferiores
+    4300178: carroseria
+    4300180: detalles
+    4300182: inferior
+    4300184: direccionales
+    4300186: llantas
+    4300188: otros
+    4300190: plastico
+    4300192: retrovisores
+    4300194: taparudea
+    4300196: vidrios
+    4300198: caja
+    4300200: borde
+    4300202: puerta_derc
+    4300204: barra
+    4300206: polySurface577
+    4300208: puerta_izq
+    4300210: barras_inferiores
+    4300212: carroseria
+    4300214: detalles
+    4300216: inferior
+    4300218: direccionales
+    4300220: llantas
+    4300222: otros
+    4300224: plastico
+    4300226: retrovisores
+    4300228: taparudea
+    4300230: vidrios
+    4300232: caja
+    4300234: borde
+    4300236: puerta_derc
+    4300238: barra
+    4300240: polySurface577
+    4300242: puerta_izq
+    4300244: barras_inferiores
+    4300246: carroseria
+    4300248: detalles
+    4300250: inferior
+    4300252: direccionales
+    4300254: llantas
+    4300256: otros
+    4300258: plastico
+    4300260: retrovisores
+    4300262: taparudea
+    4300264: vidrios
+    4300266: caja
+    4300268: borde
+    4300270: puerta_derc
+    4300272: barra
+    4300274: polySurface577
+    4300276: puerta_izq
+    4300278: barras_inferiores
+    4300280: carroseria
+    4300282: detalles
+    4300284: inferior
+    4300286: direccionales
+    4300288: llantas
+    4300290: otros
+    4300292: plastico
+    4300294: retrovisores
+    4300296: taparudea
+    4300298: vidrios
+    4300300: caja
+    4300302: borde
+    4300304: puerta_derc
+    4300306: barra
+    4300308: polySurface577
+    4300310: puerta_izq
+    4300312: barras_inferiores
+    4300314: carroseria
+    4300316: detalles
+    4300318: inferior
+    4300320: direccionales
+    4300322: llantas
+    4300324: otros
+    4300326: plastico
+    4300328: retrovisores
+    4300330: taparudea
+    4300332: vidrios
+    4300334: caja
+    4300336: borde
+    4300338: puerta_derc
+    4300340: barra
+    4300342: polySurface577
+    4300344: puerta_izq
+    4300346: barras_inferiores
+    4300348: carroseria
+    4300350: detalles
+    4300352: inferior
+    4300354: direccionales
+    4300356: llantas
+    4300358: otros
+    4300360: plastico
+    4300362: retrovisores
+    4300364: taparudea
+    4300366: vidrios
+    4300368: caja
+    4300370: borde
+    4300372: puerta_derc
+    4300374: barra
+    4300376: polySurface577
+    4300378: puerta_izq
+    4300380: barras_inferiores
+    4300382: carroseria
+    4300384: detalles
+    4300386: inferior
+    4300388: direccionales
+    4300390: llantas
+    4300392: otros
+    4300394: plastico
+    4300396: retrovisores
+    4300398: taparudea
+    4300400: vidrios
+    4300402: caja
+    4300404: borde
+    4300406: puerta_derc
+    4300408: barra
+    4300410: polySurface577
+    4300412: puerta_izq
+    4300414: pCube1
+    9500000: //RootNode
+    13700000: barra
+    13700002: polySurface577
+    13700004: puerta_derc
+    13700006: puerta_izq 1
+    13700008: barra 1
+    13700010: barra 2
+    13700012: barra 3
+    13700014: barra 4
+    13700016: barra 5
+    13700018: polySurface577 1
+    13700020: polySurface577 2
+    13700022: polySurface577 3
+    13700024: polySurface577 4
+    13700026: polySurface577 5
+    13700028: puerta_derc 1
+    13700030: puerta_derc 2
+    13700032: puerta_derc 3
+    13700034: puerta_derc 4
+    13700036: puerta_derc 5
+    13700038: puerta_izq 12
+    13700040: puerta_izq 13
+    13700042: puerta_izq 14
+    13700044: puerta_izq 15
+    13700046: puerta_izq 16
+    13700048: puerta_izq 17
+    13700050: Rines
+    13700052: derecha
+    13700054: izquierda
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
