@@ -26,24 +26,29 @@ namespace Cross_Docking
         private void Update()
         {
             if (manoOcupada == true && controladorInput.triggerPresionado == false)
+            {
                 if (tipoObjetoMano == TipoObjetoMano.UnaMano)
-                    SoltarObjeto();
-
+                    SoltarObjetoUnaMano();
+            }
         }
 
-        private void EstablecerTipoObjetoDobleMano(Interactible interactible)
+        private void AgarrarObjetoDosManos(Interactible interactible)
         {
-            AgarrarObjeto(interactible.gameObject);
-        }
-
-        private void EstablecerTipoObjetoIndividual(Interactible interactible)
-        {
+            manoOcupada = true;
             manoLista = true;
             objetoEnMano = interactible.gameObject;
             OnHandReady(interactible);
+            tipoObjetoMano = TipoObjetoMano.DosManos;
         }
 
-        private void AgarrarObjeto(GameObject objeto)
+        public void SoltarObjetoDobleMano()
+        {
+            manoLista = false;
+            manoOcupada = false;
+            tipoObjetoMano = TipoObjetoMano.Ninguno;
+        }
+
+        private void AgarrarObjetoUnaMano(GameObject objeto)
         {
             FixedJoint fixedJoint = gameObject.AddComponent<FixedJoint>();
             fixedJoint.connectedBody = objeto.GetComponent<Rigidbody>();
@@ -53,7 +58,7 @@ namespace Cross_Docking
             tipoObjetoMano = TipoObjetoMano.UnaMano;
         }
 
-        private void SoltarObjeto()
+        private void SoltarObjetoUnaMano()
         {
             FixedJoint fixedJoint = gameObject.GetComponent<FixedJoint>();
             Rigidbody rigObjeto = fixedJoint.connectedBody;
@@ -75,9 +80,9 @@ namespace Cross_Docking
                     Interactible interactible = other.transform.GetComponent<Interactible>();
 
                     if (interactible != null && interactible.agarreDobleMano == true)
-                        EstablecerTipoObjetoDobleMano(interactible);
+                        AgarrarObjetoDosManos(interactible);
                     else if (interactible != null && interactible.agarreDobleMano == false)
-                        EstablecerTipoObjetoIndividual(interactible);
+                        AgarrarObjetoUnaMano(interactible.gameObject);
                 }
             }
         }

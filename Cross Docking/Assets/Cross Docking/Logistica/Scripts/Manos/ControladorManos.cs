@@ -7,6 +7,8 @@ namespace Cross_Docking
         [SerializeField] private Mano derecha;
         [SerializeField] private Mano izquierda;
 
+        [SerializeField] private ControladorInput inputDerecha;
+        [SerializeField] private ControladorInput inputIzquierdo;
         private ControladorPosicionManos controladorPosicionManos;
 
         private Transform posicionDerecha;
@@ -24,6 +26,10 @@ namespace Cross_Docking
 
         private void Update()
         {
+            if (!objetoEnMano)
+                return;
+
+            VerificarInputs();
             VerificarAgarreObjeto();
         }
 
@@ -39,22 +45,28 @@ namespace Cross_Docking
             }
         }
 
+        private void VerificarInputs()
+        {
+            if (inputDerecha.triggerPresionado == false || inputIzquierdo.triggerPresionado == false)
+            {
+                SoltarObjetoDobleMano();
+            }
+        }
+
         private void VerificarAgarreObjeto()
         {
-            if (objetoEnMano)
+            Vector3 posDerecha = posicionDerecha.position;
+            Vector3 posIzquierda = posicionIzquierda.position;
+            if (Vector3.Distance(posDerecha, posIzquierda) > 1.5f)
             {
-                Vector3 posDerecha = posicionDerecha.position;
-                Vector3 posIzquierda = posicionIzquierda.position;
-                if (Vector3.Distance(posDerecha, posIzquierda) > 1.5f)
-                {
-                    SoltarObjetoDobleMano();
-                }
+                SoltarObjetoDobleMano();
             }
         }
 
         private void SoltarObjetoDobleMano()
         {
-
+            controladorPosicionManos.DesactivarActualizacion();
+            objetoEnMano = false;
         }
     }
 }

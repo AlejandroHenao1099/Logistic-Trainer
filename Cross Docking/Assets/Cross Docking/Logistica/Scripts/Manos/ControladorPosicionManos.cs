@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Cross_Docking
@@ -34,12 +33,12 @@ namespace Cross_Docking
 
                 cajaPosicionada = true;
 
-                OnUpdate += CalcularDireccionVectorMedio;
                 CalcularPosicionInicial();
+                OnUpdate += CalcularDireccionVectorMedio;                
             }
         }
 
-        private void DesactivarActualizacion()
+        public void DesactivarActualizacion()
         {
             if (cajaPosicionada)
             {
@@ -54,16 +53,6 @@ namespace Cross_Docking
                 objetoAMover = null;
                 cajaPosicionada = false;
             }
-        }
-
-        private void ActualizarPosicion()
-        {
-            objetoAMover.position = CalcularPuntoMedio();
-        }
-
-        private void ActualizarRotacion()
-        {
-            objetoAMover.rotation = CalcularRotacionMedia();
         }
 
         private void CalcularPosicionInicial()
@@ -86,20 +75,20 @@ namespace Cross_Docking
             objetoAMover.LookAt(vectorUp);
         }
 
-        private Vector3 CalcularPuntoMedio()
-        {
-            Vector3 posDer = manoDerecha.position;
-            Vector3 posIzq = manoIzquierda.position;
-            Vector3 posObjeto = Vector3.Lerp(posDer, posIzq, 0.5f);
-            return posObjeto;
-        }
+        // private Vector3 CalcularPuntoMedio()
+        // {
+        //     Vector3 posDer = manoDerecha.position;
+        //     Vector3 posIzq = manoIzquierda.position;
+        //     Vector3 posObjeto = Vector3.Lerp(posDer, posIzq, 0.5f);
+        //     return posObjeto;
+        // }
 
-        private Quaternion CalcularRotacionMedia()
-        {
-            Quaternion rotDer = manoDerecha.rotation;
-            Quaternion rotIzq = manoIzquierda.rotation;
-            Quaternion rotacion = Quaternion.Slerp(rotDer, rotIzq, 0.5f);
-            return rotacion;
-        }
+        // private Quaternion CalcularRotacionMedia()
+        // {
+        //     Quaternion rotDer = manoDerecha.rotation;
+        //     Quaternion rotIzq = manoIzquierda.rotation;
+        //     Quaternion rotacion = Quaternion.Slerp(rotDer, rotIzq, 0.5f);
+        //     return rotacion;
+        // }
     }
 }
