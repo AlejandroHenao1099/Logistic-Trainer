@@ -7,7 +7,8 @@ namespace SENA
         public Transform cameraRigTransform;
         public Transform headTransform; // The camera rig's head
         public Vector3 teleportReticleOffset; // Offset from the floor for the reticle to avoid z-fighting
-        public LayerMask teleportMask; // Mask to filter out areas where teleports are allowed
+        public LayerMask teleportMask;
+        public LayerMask capa = 1 << 8; // Mask to filter out areas where teleports are allowed
 
         public GameObject teleportReticlePrefab; // Stores a reference to the teleport reticle prefab.
         private GameObject reticle; // A reference to an instance of the reticle
@@ -47,8 +48,9 @@ namespace SENA
                     //Show teleport reticle
                     reticle.SetActive(true);
                     teleportReticleTransform.position = hitPoint + teleportReticleOffset;
+                    int capaObjeto = 1 << hit.transform.gameObject.layer;
 
-                    if (hit.transform.gameObject.layer == teleportMask)
+                    if (capaObjeto == capa)
                     {
                         shouldTeleport = true;
                         reticle.GetComponent<MeshRenderer>().material.color = Color.green;

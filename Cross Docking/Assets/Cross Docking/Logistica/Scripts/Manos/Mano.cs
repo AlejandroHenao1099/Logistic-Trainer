@@ -11,28 +11,54 @@ namespace Cross_Docking
         }
 
         private TipoObjetoMano tipoObjetoMano;
-        public Action<Interactible> OnHandReady;
-        private ControladorInput controladorInput;
+        public Action<ObjetoInteractible> OnHandReady;
         public GameObject objetoEnMano { get; set; }
+
+        private GameObject objetoColisionando;
 
         public bool manoLista { get; private set; }
         private bool manoOcupada;
 
+        private SteamVR_TrackedObject trackedObject;
+
+        public SteamVR_Controller.Device Controller
+        {
+            get { return SteamVR_Controller.Input((int)trackedObject.index); }
+        }
+
         private void Awake()
         {
-            controladorInput = GetComponent<ControladorInput>();
+            trackedObject = GetComponent<SteamVR_TrackedObject>();
         }
 
         private void Update()
         {
-            if (manoOcupada == true && controladorInput.triggerPresionado == false)
-            {
-                if (tipoObjetoMano == TipoObjetoMano.UnaMano)
-                    SoltarObjetoUnaMano();
-            }
+            if (Controller.GetHairTriggerDown())
+                if (objetoColisionando)        
+                    DeterminarAgarreObjeto();  
+
+            if (Controller.GetHairTriggerUp())   
+                if (objetoEnMano)
+                   DeterminarSoltarObjeto();  
         }
 
-        private void AgarrarObjetoDosManos(Interactible interactible)
+        private void DeterminarAgarreObjeto()
+        {
+            ObjetoInteractible interactible = objetoColisionando.transform.GetComponent<ObjetoInteractible>();
+
+            if (interactible != null && interactible.agarreDobleMano == true)
+                AgarrarObjetoDosManos(interactible);
+            else if (interactible != null && interactible.agarreDobleMano == false)
+                AgarrarObjetoUnaMano();
+        }
+
+        private void DeterminarSoltarObjeto()
+        {
+            if (tipoObjetoMano == TipoObjetoMano.UnaMano)
+                SoltarObjetoUnaMano();
+        }
+
+        private void AgarrarObjetoDosManos(ObjetoInteractible interactible)
         {
             manoOcupada = true;
             manoLista = true;
@@ -48,43 +74,65 @@ namespace Cross_Docking
             tipoObjetoMano = TipoObjetoMano.Ninguno;
         }
 
-        private void AgarrarObjetoUnaMano(GameObject objeto)
+        private void AgarrarObjetoUnaMano()
         {
-            FixedJoint fixedJoint = gameObject.AddComponent<FixedJoint>();
-            fixedJoint.connectedBody = objeto.GetComponent<Rigidbody>();
-            fixedJoint.breakForce = 20000f;
-            fixedJoint.breakTorque = 20000f;
             manoOcupada = true;
             tipoObjetoMano = TipoObjetoMano.UnaMano;
+            objetoEnMano = objetoColisionando;
+            objetoColisionando = null;
+            FixedJoint fixedJoint = AgregarFixedJoint();
+            fixedJoint.connectedBody = objetoEnMano.GetComponent<Rigidbody>();
+        }
+
+        private FixedJoint AgregarFixedJoint()
+        {
+            FixedJoint fx = gameObject.AddComponent<FixedJoint>();
+            fx.breakForce = 1000000f;
+            fx.breakTorque = 1000000f;
+            return fx;
         }
 
         private void SoltarObjetoUnaMano()
         {
-            FixedJoint fixedJoint = gameObject.GetComponent<FixedJoint>();
-            Rigidbody rigObjeto = fixedJoint.connectedBody;
-            Rigidbody rigMano = GetComponent<Rigidbody>();
-            Destroy(fixedJoint);
-
-            rigObjeto.velocity = rigMano.velocity;
-            rigObjeto.angularVelocity = rigMano.angularVelocity;
+            if (GetComponent<FixedJoint>())
+            {
+                GetComponent<FixedJoint>().connectedBody = null;
+                Destroy(GetComponent<FixedJoint>());
+                Vector3 velocidad = Controller.velocity;
+                velocidad.x = -velocidad.x;
+                velocidad.z = -velocidad.z;
+                objetoEnMano.GetComponent<Rigidbody>().velocity = velocidad;
+                objetoEnMano.GetComponent<Rigidbody>().angularVelocity = -Controller.angularVelocity;
+            }
             manoOcupada = false;
             tipoObjetoMano = TipoObjetoMano.Ninguno;
+            objetoEnMano = null;
         }
 
-        private void OnTriggerStay(Collider other)
+        public void OnTriggerEnter(Collider other)
         {
-            if (manoOcupada == false)
-            {
-                if (controladorInput.triggerPresionado == true)
-                {
-                    Interactible interactible = other.transform.GetComponent<Interactible>();
+            EstablecerObjetoCOlisionando(other);
+        }
 
-                    if (interactible != null && interactible.agarreDobleMano == true)
-                        AgarrarObjetoDosManos(interactible);
-                    else if (interactible != null && interactible.agarreDobleMano == false)
-                        AgarrarObjetoUnaMano(interactible.gameObject);
-                }
-            }
+        public void OnTriggerStay(Collider other)
+        {
+            EstablecerObjetoCOlisionando(other);
+        }
+
+        public void OnTriggerExit(Collider other)
+        {
+            if (!objetoColisionando)
+                return;
+
+            objetoColisionando = null;
+        }
+
+        private void EstablecerObjetoCOlisionando(Collider col)
+        {
+            if (objetoColisionando || !col.GetComponent<ObjetoInteractible>())
+                return;
+
+            objetoColisionando = col.gameObject;
         }
     }
 }

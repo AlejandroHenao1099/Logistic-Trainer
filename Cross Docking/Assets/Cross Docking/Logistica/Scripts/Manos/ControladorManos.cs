@@ -19,6 +19,8 @@ namespace Cross_Docking
 
         private void Awake()
         {
+            posicionDerecha = derecha.transform;
+            posicionIzquierda = izquierda.transform;
             controladorPosicionManos = GetComponent<ControladorPosicionManos>();
             derecha.OnHandReady += VerificarManos;
             izquierda.OnHandReady += VerificarManos;
@@ -33,7 +35,7 @@ namespace Cross_Docking
             VerificarAgarreObjeto();
         }
 
-        private void VerificarManos(Interactible interactible)
+        private void VerificarManos(ObjetoInteractible interactible)
         {
             if (objetoEnMano == false && (derecha.manoLista && izquierda.manoLista))
             {
@@ -66,6 +68,8 @@ namespace Cross_Docking
         private void SoltarObjetoDobleMano()
         {
             controladorPosicionManos.DesactivarActualizacion();
+            derecha.SoltarObjetoDobleMano();
+            izquierda.SoltarObjetoDobleMano();
             objetoEnMano = false;
         }
     }

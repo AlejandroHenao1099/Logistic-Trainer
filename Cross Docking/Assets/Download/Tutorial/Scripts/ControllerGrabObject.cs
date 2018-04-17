@@ -39,7 +39,6 @@ public class ControllerGrabObject : MonoBehaviour
         trackedObj = GetComponent<SteamVR_TrackedObject>();
     }
 
-
     public void OnTriggerEnter(Collider other)
     {
         SetCollidingObject(other);
