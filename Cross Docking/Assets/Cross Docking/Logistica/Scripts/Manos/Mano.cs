@@ -9,37 +9,36 @@ namespace Cross_Docking
         {
             Ninguno, UnaMano, DosManos
         }
-
         private TipoObjetoMano tipoObjetoMano;
+        private ControladorInput controladorInput;
         public Action<ObjetoInteractible> OnHandReady;
         public GameObject objetoEnMano { get; set; }
+        private Transform objetoEstatico;
 
         private GameObject objetoColisionando;
 
         public bool manoLista { get; private set; }
-        private bool manoOcupada;
-
-        private SteamVR_TrackedObject trackedObject;
-
-        public SteamVR_Controller.Device Controller
-        {
-            get { return SteamVR_Controller.Input((int)trackedObject.index); }
-        }
+        private bool actualizarObjetoNoMovible;
 
         private void Awake()
         {
-            trackedObject = GetComponent<SteamVR_TrackedObject>();
+            controladorInput = GetComponent<ControladorInput>();
         }
 
         private void Update()
         {
-            if (Controller.GetHairTriggerDown())
-                if (objetoColisionando)        
-                    DeterminarAgarreObjeto();  
+            if (controladorInput.triggerPresionado == true)
+                if (objetoColisionando)
+                    DeterminarAgarreObjeto();
 
-            if (Controller.GetHairTriggerUp())   
+            if (controladorInput.triggerPresionado == false)
                 if (objetoEnMano)
-                   DeterminarSoltarObjeto();  
+                    DeterminarSoltarObjeto();
+
+            if (!actualizarObjetoNoMovible)
+                return;
+
+            ActualizarRotacionObjetoNoMovible();
         }
 
         private void DeterminarAgarreObjeto()
@@ -60,7 +59,6 @@ namespace Cross_Docking
 
         private void AgarrarObjetoDosManos(ObjetoInteractible interactible)
         {
-            manoOcupada = true;
             manoLista = true;
             objetoEnMano = interactible.gameObject;
             OnHandReady(interactible);
@@ -70,53 +68,89 @@ namespace Cross_Docking
         public void SoltarObjetoDobleMano()
         {
             manoLista = false;
-            manoOcupada = false;
             tipoObjetoMano = TipoObjetoMano.Ninguno;
         }
 
         private void AgarrarObjetoUnaMano()
         {
-            manoOcupada = true;
             tipoObjetoMano = TipoObjetoMano.UnaMano;
             objetoEnMano = objetoColisionando;
             objetoColisionando = null;
-            FixedJoint fixedJoint = AgregarFixedJoint();
-            fixedJoint.connectedBody = objetoEnMano.GetComponent<Rigidbody>();
+
+            if (objetoEnMano.GetComponent<ObjetoInteractible>().objetoMovible == true)
+            {
+                FixedJoint fixedJoint = AgregarFixedJoint();
+                fixedJoint.connectedBody = objetoEnMano.GetComponent<Rigidbody>();
+            }
+            else
+            {
+                objetoEstatico = objetoEnMano.transform;
+                actualizarObjetoNoMovible = true;
+            }
         }
 
         private FixedJoint AgregarFixedJoint()
         {
             FixedJoint fx = gameObject.AddComponent<FixedJoint>();
-            fx.breakForce = 1000000f;
-            fx.breakTorque = 1000000f;
+            fx.breakForce = 20000f;
+            fx.breakTorque = 20000f;
             return fx;
         }
 
         private void SoltarObjetoUnaMano()
         {
-            if (GetComponent<FixedJoint>())
+            if (objetoEnMano.GetComponent<ObjetoInteractible>().objetoMovible == true)
             {
-                GetComponent<FixedJoint>().connectedBody = null;
-                Destroy(GetComponent<FixedJoint>());
-                Vector3 velocidad = Controller.velocity;
-                velocidad.x = -velocidad.x;
-                velocidad.z = -velocidad.z;
-                objetoEnMano.GetComponent<Rigidbody>().velocity = velocidad;
-                objetoEnMano.GetComponent<Rigidbody>().angularVelocity = -Controller.angularVelocity;
+                if (GetComponent<FixedJoint>())
+                {
+                    GetComponent<FixedJoint>().connectedBody = null;
+                    Destroy(GetComponent<FixedJoint>());
+                    Vector3 velocidad = controladorInput.Controller.velocity;
+                    velocidad.x = -velocidad.x;
+                    velocidad.z = -velocidad.z;
+                    objetoEnMano.GetComponent<Rigidbody>().velocity = velocidad;
+                    objetoEnMano.GetComponent<Rigidbody>().angularVelocity = -controladorInput.Controller.angularVelocity;
+                }
             }
-            manoOcupada = false;
+            else
+            {
+                objetoEnMano.GetComponent<Rigidbody>().angularVelocity = -controladorInput.Controller.angularVelocity;
+                actualizarObjetoNoMovible = false;
+                objetoEstatico = null;
+            }
+
             tipoObjetoMano = TipoObjetoMano.Ninguno;
             objetoEnMano = null;
         }
 
+        private void ActualizarRotacionObjetoNoMovible()
+        {
+            Vector3 targetDelta = transform.position - objetoEstatico.position;
+            targetDelta.y = 0;
+
+            float diferenciaDeAngulo = Vector3.Angle(objetoEstatico.forward, targetDelta);
+
+            Vector3 cross = Vector3.Cross(objetoEstatico.forward, targetDelta);
+
+            objetoEstatico.GetComponent<Rigidbody>().angularVelocity = cross * diferenciaDeAngulo * 50f;
+        }
+
+        private void EstablecerObjetoColisionando(Collider col)
+        {
+            if (objetoColisionando || !col.GetComponent<ObjetoInteractible>())
+                return;
+
+            objetoColisionando = col.gameObject;
+        }
+
         public void OnTriggerEnter(Collider other)
         {
-            EstablecerObjetoCOlisionando(other);
+            EstablecerObjetoColisionando(other);
         }
 
         public void OnTriggerStay(Collider other)
         {
-            EstablecerObjetoCOlisionando(other);
+            EstablecerObjetoColisionando(other);
         }
 
         public void OnTriggerExit(Collider other)
@@ -125,14 +159,6 @@ namespace Cross_Docking
                 return;
 
             objetoColisionando = null;
-        }
-
-        private void EstablecerObjetoCOlisionando(Collider col)
-        {
-            if (objetoColisionando || !col.GetComponent<ObjetoInteractible>())
-                return;
-
-            objetoColisionando = col.gameObject;
         }
     }
 }

@@ -28,13 +28,14 @@ namespace Cross_Docking
         {
             if (!cajaPosicionada)
             {
-                objetoAMover = objeto;
+                objetoAMover = objeto.parent;
+                objetoAMover.GetComponent<Rigidbody>().isKinematic = true;
                 actualizando = true;
 
                 cajaPosicionada = true;
 
                 CalcularPosicionInicial();
-                OnUpdate += CalcularDireccionVectorMedio;                
+                OnUpdate += CalcularDireccionVectorMedio;
             }
         }
 
@@ -50,6 +51,7 @@ namespace Cross_Docking
                 objetoAMover.rotation = rotacion;
                 objetoAMover.GetChild(0).localPosition = Vector3.zero;
                 objetoAMover.GetChild(0).localRotation = Quaternion.identity;
+                objetoAMover.GetComponent<Rigidbody>().isKinematic = false;
                 objetoAMover = null;
                 cajaPosicionada = false;
             }
@@ -60,9 +62,11 @@ namespace Cross_Docking
             vectorUp = (manoIzquierda.position - manoDerecha.position).normalized;
             vectorUp += manoDerecha.position;
             Vector3 posicionMedia = Vector3.Lerp(manoDerecha.position, manoIzquierda.position, 0.5f);
-            objetoAMover.position = posicionMedia;
+            Vector3 posicion = objetoAMover.GetChild(0).position;
             Quaternion rotacion = objetoAMover.GetChild(0).rotation;
+            objetoAMover.position = posicionMedia;
             objetoAMover.LookAt(vectorUp);
+            objetoAMover.GetChild(0).position = posicion;
             objetoAMover.GetChild(0).rotation = rotacion;
         }
 
@@ -74,21 +78,5 @@ namespace Cross_Docking
             objetoAMover.position = posicionMedia;
             objetoAMover.LookAt(vectorUp);
         }
-
-        // private Vector3 CalcularPuntoMedio()
-        // {
-        //     Vector3 posDer = manoDerecha.position;
-        //     Vector3 posIzq = manoIzquierda.position;
-        //     Vector3 posObjeto = Vector3.Lerp(posDer, posIzq, 0.5f);
-        //     return posObjeto;
-        // }
-
-        // private Quaternion CalcularRotacionMedia()
-        // {
-        //     Quaternion rotDer = manoDerecha.rotation;
-        //     Quaternion rotIzq = manoIzquierda.rotation;
-        //     Quaternion rotacion = Quaternion.Slerp(rotDer, rotIzq, 0.5f);
-        //     return rotacion;
-        // }
     }
 }

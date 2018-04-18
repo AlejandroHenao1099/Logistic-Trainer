@@ -6,5 +6,8 @@ namespace Cross_Docking
     {
         [Tooltip("Determina si el objeto debe ser agarrado con los 2 controles o no")]
         public bool agarreDobleMano = false;
+
+        [Tooltip("Determina si el objeto esta fijo, o si se puede mover")]
+        public bool objetoMovible = true;
     }
 }

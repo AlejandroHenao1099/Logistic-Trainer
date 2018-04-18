@@ -7,7 +7,6 @@ namespace SENA
         public Transform cameraRigTransform;
         public Transform headTransform; // The camera rig's head
         public Vector3 teleportReticleOffset; // Offset from the floor for the reticle to avoid z-fighting
-        public LayerMask teleportMask;
         public LayerMask capa = 1 << 8; // Mask to filter out areas where teleports are allowed
 
         public GameObject teleportReticlePrefab; // Stores a reference to the teleport reticle prefab.
@@ -42,21 +41,28 @@ namespace SENA
                 RaycastHit hit;
 
                 // Send out a raycast from the controller
-                if (Physics.Raycast(headTransform.position, headTransform.forward, out hit, 50, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+                if (Physics.SphereCast(headTransform.position, 0.1f, headTransform.forward, out hit, 50, Physics.AllLayers, QueryTriggerInteraction.Ignore))
                 {
-                    hitPoint = hit.point;
                     //Show teleport reticle
-                    reticle.SetActive(true);
-                    teleportReticleTransform.position = hitPoint + teleportReticleOffset;
                     int capaObjeto = 1 << hit.transform.gameObject.layer;
 
                     if (capaObjeto == capa)
                     {
+                        Vector3 puntoNormalizado = hit.point;
+                        puntoNormalizado.y = 10000f;
+                        hitPoint = hit.transform.GetComponent<Collider>().ClosestPointOnBounds(puntoNormalizado);
+
+                        reticle.SetActive(true);
+                        teleportReticleTransform.position = hitPoint + teleportReticleOffset;
                         shouldTeleport = true;
                         reticle.GetComponent<MeshRenderer>().material.color = Color.green;
                     }
                     else
                     {
+                        hitPoint = hit.point;
+                        reticle.SetActive(true);
+                        teleportReticleTransform.position = hitPoint + teleportReticleOffset;
+
                         shouldTeleport = false;
                         reticle.GetComponent<MeshRenderer>().material.color = Color.red;
                     }
