@@ -49,7 +49,7 @@ namespace Cross_Docking
 
         private void VerificarInputs()
         {
-            if (inputDerecha.triggerPresionado == false || inputIzquierdo.triggerPresionado == false)
+            if (inputDerecha.Controller.GetHairTriggerUp() || inputIzquierdo.Controller.GetHairTriggerUp())
             {
                 SoltarObjetoDobleMano();
             }

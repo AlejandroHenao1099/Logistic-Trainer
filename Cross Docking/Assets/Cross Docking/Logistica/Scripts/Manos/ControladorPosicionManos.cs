@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
 namespace Cross_Docking
@@ -73,15 +72,11 @@ namespace Cross_Docking
         private void CalcularDireccionVectorMedio()
         {
             vectorForward = (manoIzquierda.position - manoDerecha.position).normalized;
-            //vectorForward += manoDerecha.position;
+            vectorForward += manoDerecha.position;
             Vector3 posicionMedia = Vector3.Lerp(manoDerecha.position, manoIzquierda.position, 0.5f);
             objetoAMover.position = posicionMedia;
 
-            Vector3 vectorUp = Quaternion.Euler(-90f, 0f, 0f) * vectorForward;
-
-            Quaternion rotacionMirar = Quaternion.LookRotation(vectorForward, vectorUp);
-            objetoAMover.rotation = rotacionMirar;
-            //objetoAMover.LookAt(vectorForward);
+            objetoAMover.LookAt(vectorForward);
         }
     }
 }

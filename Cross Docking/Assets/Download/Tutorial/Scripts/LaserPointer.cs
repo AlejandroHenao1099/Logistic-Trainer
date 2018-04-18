@@ -41,7 +41,7 @@ namespace SENA
                 RaycastHit hit;
 
                 // Send out a raycast from the controller
-                if (Physics.SphereCast(headTransform.position, 0.1f, headTransform.forward, out hit, 50, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+                if (Physics.Raycast(headTransform.position, headTransform.forward, out hit, 50, Physics.AllLayers, QueryTriggerInteraction.Ignore))
                 {
                     //Show teleport reticle
                     int capaObjeto = 1 << hit.transform.gameObject.layer;

@@ -27,11 +27,11 @@ namespace Cross_Docking
 
         private void Update()
         {
-            if (controladorInput.triggerPresionado == true)
+            if (controladorInput.Controller.GetHairTriggerDown())
                 if (objetoColisionando)
                     DeterminarAgarreObjeto();
 
-            if (controladorInput.triggerPresionado == false)
+            if (controladorInput.Controller.GetHairTriggerUp())
                 if (objetoEnMano)
                     DeterminarSoltarObjeto();
 
