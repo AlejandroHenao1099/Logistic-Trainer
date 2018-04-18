@@ -45,10 +45,12 @@ namespace Cross_Docking
         {
             ObjetoInteractible interactible = objetoColisionando.transform.GetComponent<ObjetoInteractible>();
 
-            if (interactible != null && interactible.agarreDobleMano == true)
+            if (interactible != null && interactible.tipoDeAgarreObjeto == TipoDeAgarre.DosManos)
                 AgarrarObjetoDosManos(interactible);
-            else if (interactible != null && interactible.agarreDobleMano == false)
+            else if (interactible != null && interactible.tipoDeAgarreObjeto == TipoDeAgarre.UnaMano)
                 AgarrarObjetoUnaMano();
+            else if (interactible != null && interactible.tipoDeAgarreObjeto == TipoDeAgarre.Ambos)
+                AgarrarObjetoAmbasManos(interactible);
         }
 
         private void DeterminarSoltarObjeto()
@@ -77,7 +79,7 @@ namespace Cross_Docking
             objetoEnMano = objetoColisionando;
             objetoColisionando = null;
 
-            if (objetoEnMano.GetComponent<ObjetoInteractible>().objetoMovible == true)
+            if (objetoEnMano.GetComponent<ObjetoInteractible>().tipoDeMovilidadObjeto == TipoDeMovilidad.Libre)
             {
                 FixedJoint fixedJoint = AgregarFixedJoint();
                 fixedJoint.connectedBody = objetoEnMano.GetComponent<Rigidbody>();
@@ -97,9 +99,16 @@ namespace Cross_Docking
             return fx;
         }
 
+        private void AgarrarObjetoAmbasManos(ObjetoInteractible interactible)
+        {
+            manoLista = true;
+            objetoEnMano = interactible.gameObject;
+            tipoObjetoMano = TipoObjetoMano.DosManos;
+        }
+
         private void SoltarObjetoUnaMano()
         {
-            if (objetoEnMano.GetComponent<ObjetoInteractible>().objetoMovible == true)
+            if (objetoEnMano.GetComponent<ObjetoInteractible>().tipoDeMovilidadObjeto == TipoDeMovilidad.Libre)
             {
                 if (GetComponent<FixedJoint>())
                 {
