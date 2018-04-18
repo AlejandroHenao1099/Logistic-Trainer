@@ -12,7 +12,7 @@ namespace Cross_Docking
 
         private Action OnUpdate;
 
-        private Vector3 vectorUp;
+        private Vector3 vectorForward;
 
         private bool actualizando;
         private bool cajaPosicionada;
@@ -59,24 +59,29 @@ namespace Cross_Docking
 
         private void CalcularPosicionInicial()
         {
-            vectorUp = (manoIzquierda.position - manoDerecha.position).normalized;
-            vectorUp += manoDerecha.position;
+            vectorForward = (manoIzquierda.position - manoDerecha.position).normalized;
+            vectorForward += manoDerecha.position;
             Vector3 posicionMedia = Vector3.Lerp(manoDerecha.position, manoIzquierda.position, 0.5f);
             Vector3 posicion = objetoAMover.GetChild(0).position;
             Quaternion rotacion = objetoAMover.GetChild(0).rotation;
             objetoAMover.position = posicionMedia;
-            objetoAMover.LookAt(vectorUp);
+            objetoAMover.LookAt(vectorForward);
             objetoAMover.GetChild(0).position = posicion;
             objetoAMover.GetChild(0).rotation = rotacion;
         }
 
         private void CalcularDireccionVectorMedio()
         {
-            vectorUp = (manoIzquierda.position - manoDerecha.position).normalized;
-            vectorUp += manoDerecha.position;
+            vectorForward = (manoIzquierda.position - manoDerecha.position).normalized;
+            //vectorForward += manoDerecha.position;
             Vector3 posicionMedia = Vector3.Lerp(manoDerecha.position, manoIzquierda.position, 0.5f);
             objetoAMover.position = posicionMedia;
-            objetoAMover.LookAt(vectorUp);
+
+            Vector3 vectorUp = Quaternion.Euler(-90f, 0f, 0f) * vectorForward;
+
+            Quaternion rotacionMirar = Quaternion.LookRotation(vectorForward, vectorUp);
+            objetoAMover.rotation = rotacionMirar;
+            //objetoAMover.LookAt(vectorForward);
         }
     }
 }
