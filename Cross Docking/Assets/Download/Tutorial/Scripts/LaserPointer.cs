@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 
-namespace SENA
+namespace Cross_Docking
 {
     public class LaserPointer : MonoBehaviour
     {
+        private ControladorInput controladorInput;
+        private PosicionarJugador refAuto;
+
         public Transform cameraRigTransform;
         public Transform headTransform; // The camera rig's head
+
         public Vector3 teleportReticleOffset; // Offset from the floor for the reticle to avoid z-fighting
         private LayerMask capa = 1 << 8; // Mask to filter out areas where teleports are allowed
 
@@ -15,16 +19,12 @@ namespace SENA
 
         private Vector3 hitPoint; // Point where the raycast hits
         private bool shouldTeleport; // True if there's a valid teleport target
-
-        private SteamVR_TrackedObject trackedObj;
-        private SteamVR_Controller.Device Controller
-        {
-            get { return SteamVR_Controller.Input((int)trackedObj.index); }
-        }
+        private bool montarAuto;
+        private bool teletransportar = true;
 
         private void Awake()
         {
-            trackedObj = GetComponent<SteamVR_TrackedObject>();
+            controladorInput = GetComponent<ControladorInput>();
         }
 
         private void Start()
@@ -35,45 +35,71 @@ namespace SENA
 
         private void Update()
         {
-            // Is the touchpad held down?
-            if (Controller.GetPress(SteamVR_Controller.ButtonMask.Touchpad))
+            if (!teletransportar)
+                return;
+
+            if (controladorInput.Controller.GetPress(SteamVR_Controller.ButtonMask.Touchpad))
             {
-                RaycastHit hit;
-
-                // Send out a raycast from the controller
-                if (Physics.Raycast(headTransform.position, headTransform.forward, out hit, 50, Physics.AllLayers, QueryTriggerInteraction.Ignore))
-                {
-                    //Show teleport reticle
-                    int capaObjeto = 1 << hit.transform.gameObject.layer;
-
-                    if (capaObjeto == capa)
-                    {
-                        Vector3 puntoNormalizado = hit.point;
-                        puntoNormalizado.y = 10000f;
-                        hitPoint = hit.transform.GetComponent<Collider>().ClosestPointOnBounds(puntoNormalizado);
-
-                        reticle.SetActive(true);
-                        teleportReticleTransform.position = hitPoint + teleportReticleOffset;
-                        shouldTeleport = true;
-                        reticle.GetComponent<MeshRenderer>().material.color = Color.green;
-                    }
-                    else
-                    {
-                        hitPoint = hit.point;
-                        reticle.SetActive(true);
-                        teleportReticleTransform.position = hitPoint + teleportReticleOffset;
-
-                        shouldTeleport = false;
-                        reticle.GetComponent<MeshRenderer>().material.color = Color.red;
-                    }
-                }
+                CalcularPuntoImpacto();
             }
-            else // Touchpad not held down, hide laser & teleport reticle
+            else
                 reticle.SetActive(false);
 
-            // Touchpad released this frame & valid teleport position found
-            if (Controller.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad) && shouldTeleport)
-                Teleport();
+            if (controladorInput.Controller.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad))
+            {
+                if (shouldTeleport)
+                    Teleport();
+                else if (montarAuto)
+                {
+                    DesactivarTeletransportacion();
+                    refAuto.OnEndCar += ActivarTeletransportacion;
+                    refAuto.Comenzar();
+                }
+            }
+        }
+
+        private void CalcularPuntoImpacto()
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(headTransform.position, headTransform.forward, out hit, 50, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+            {
+                int capaObjeto = 1 << hit.transform.gameObject.layer;
+
+                if (capaObjeto == capa)
+                {
+                    Vector3 puntoNormalizado = hit.point;
+                    puntoNormalizado.y = 10000f;
+                    hitPoint = hit.transform.GetComponent<Collider>().ClosestPointOnBounds(puntoNormalizado);
+
+                    reticle.SetActive(true);
+                    teleportReticleTransform.position = hitPoint + teleportReticleOffset;
+                    shouldTeleport = true;
+                    montarAuto = false;
+                    reticle.GetComponent<MeshRenderer>().material.color = Color.green;
+                }
+                else if (hit.transform.GetComponent<PosicionarJugador>() != null)
+                {
+                    refAuto = hit.transform.GetComponent<PosicionarJugador>();
+                    hitPoint = hit.transform.position;
+                    reticle.SetActive(true);
+                    teleportReticleTransform.position = hitPoint + teleportReticleOffset + new Vector3(0, 0.1f, 0);
+
+                    shouldTeleport = false;
+                    montarAuto = true;
+                    reticle.GetComponent<MeshRenderer>().material.color = Color.yellow;
+                }
+                else
+                {
+                    montarAuto = false;
+                    hitPoint = hit.point;
+                    reticle.SetActive(true);
+                    teleportReticleTransform.position = hitPoint + teleportReticleOffset;
+
+                    shouldTeleport = false;
+                    reticle.GetComponent<MeshRenderer>().material.color = Color.red;
+                }
+            }
         }
 
         private void Teleport()
@@ -84,6 +110,16 @@ namespace SENA
             difference.y = 0; // Don't change the final position's y position, it should always be equal to that of the hit point
 
             cameraRigTransform.position = hitPoint + difference; // Change the camera rig position to where the the teleport reticle was. Also add the difference so the new virtual room position is relative to the player position, allowing the player's new position to be exactly where they pointed. (see illustration)
+        }
+
+        private void DesactivarTeletransportacion()
+        {
+            teletransportar = false;
+        }
+
+        private void ActivarTeletransportacion()
+        {
+            teletransportar = true;
         }
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 
-
     internal enum CarDriveType
     {
         FrontWheelDrive,
