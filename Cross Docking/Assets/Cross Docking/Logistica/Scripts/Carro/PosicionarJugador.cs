@@ -11,6 +11,7 @@ namespace Cross_Docking
         public Transform carro;
         private NewCarUserControl controladorCarro;
         public Transform posicionJugador;
+        public Volante volante;
 
         [Header("Player")]
         public Transform cameraRig;
@@ -23,9 +24,6 @@ namespace Cross_Docking
 
         private bool conducir;
 
-
-        //Se debe alinear la posicion con el X y Z de la camara, y ademas se debe subir el Camera rig 0.65 en Y para que quede la altura adecuada
-
         private void Awake()
         {
             izquierda = cameraRig.GetChild(0);
@@ -35,6 +33,8 @@ namespace Cross_Docking
             inputIzquierdo = izquierda.GetComponent<ControladorInput>();
 
             controladorCarro = carro.GetComponent<NewCarUserControl>();
+            volante.derecha = derecha;
+            volante.izquierda = izquierda;
         }
 
         private void Update()
@@ -43,6 +43,7 @@ namespace Cross_Docking
                 return;
 
             ObtenerInputAcelerador();
+            ObtenerInputGirar();
 
             if (inputDerecho.Controller.GetPressDown(SteamVR_Controller.ButtonMask.Grip) || inputIzquierdo.Controller.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
                 SalirAuto();
@@ -57,7 +58,16 @@ namespace Cross_Docking
 
         private void ObtenerInputGirar()
         {
+            float valorY = volante.anguloY;
+            if (valorY >= 150f)
+                valorY = 150f;
+            else if (valorY <= -150f)
+                valorY = -150f;
 
+            float rotacionVolante = valorY / 150f;
+            rotacionVolante /= 2f;
+
+            controladorCarro.axisHorizontal = -rotacionVolante;
         }
 
         public void Comenzar()

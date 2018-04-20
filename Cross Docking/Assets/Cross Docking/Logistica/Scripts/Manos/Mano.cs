@@ -49,8 +49,8 @@ namespace Cross_Docking
                 AgarrarObjetoDosManos(interactible);
             else if (interactible != null && interactible.tipoDeAgarreObjeto == TipoDeAgarre.UnaMano)
                 AgarrarObjetoUnaMano();
-            else if (interactible != null && interactible.tipoDeAgarreObjeto == TipoDeAgarre.Ambos)
-                AgarrarObjetoAmbasManos(interactible);
+            // else if (interactible != null && interactible.tipoDeAgarreObjeto == TipoDeAgarre.Ambos)
+            //     AgarrarObjetoAmbasManos(interactible);
         }
 
         private void DeterminarSoltarObjeto()
@@ -101,9 +101,10 @@ namespace Cross_Docking
 
         private void AgarrarObjetoAmbasManos(ObjetoInteractible interactible)
         {
-            manoLista = true;
-            objetoEnMano = interactible.gameObject;
-            tipoObjetoMano = TipoObjetoMano.DosManos;
+            // manoLista = true;
+            // objetoEnMano = interactible.gameObject;
+            // tipoObjetoMano = TipoObjetoMano.DosManos;
+            // OnHandReady(interactible);
         }
 
         private void SoltarObjetoUnaMano()

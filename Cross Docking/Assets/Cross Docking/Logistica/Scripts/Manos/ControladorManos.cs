@@ -14,6 +14,9 @@ namespace Cross_Docking
         private Transform posicionDerecha;
         private Transform posicionIzquierda;
 
+        private TipoDeMovilidad tipoDeMovilidad;
+        private ObjetoInteractible objetoInteractible;
+
         private bool objetoEnMano;
         private bool vectorManosAgregado;
 
@@ -41,8 +44,19 @@ namespace Cross_Docking
             {
                 if (derecha.objetoEnMano == izquierda.objetoEnMano)
                 {
-                    controladorPosicionManos.ActivarActualizacion(derecha.objetoEnMano.transform);
-                    objetoEnMano = true;
+                    if (interactible.tipoDeMovilidadObjeto == TipoDeMovilidad.Libre)
+                    {
+                        controladorPosicionManos.ActivarActualizacion(derecha.objetoEnMano.transform);
+                        objetoEnMano = true;
+                        tipoDeMovilidad = interactible.tipoDeMovilidadObjeto;
+                    }
+                    else if (interactible.tipoDeMovilidadObjeto == TipoDeMovilidad.SoloRotacion)
+                    {
+                        interactible.Iniciar();
+                        objetoInteractible = interactible;
+                        tipoDeMovilidad = interactible.tipoDeMovilidadObjeto;
+                        objetoEnMano = true;
+                    }
                 }
             }
         }
@@ -67,10 +81,19 @@ namespace Cross_Docking
 
         private void SoltarObjetoDobleMano()
         {
-            controladorPosicionManos.DesactivarActualizacion();
+            if (tipoDeMovilidad == TipoDeMovilidad.Libre)
+            {
+                controladorPosicionManos.DesactivarActualizacion();
+            }
+            else if (tipoDeMovilidad == TipoDeMovilidad.SoloRotacion)
+            {
+                objetoInteractible.Detener();
+            }
             derecha.SoltarObjetoDobleMano();
             izquierda.SoltarObjetoDobleMano();
             objetoEnMano = false;
+            tipoDeMovilidad = TipoDeMovilidad.Ninguno;
+            objetoInteractible = null;
         }
     }
 }

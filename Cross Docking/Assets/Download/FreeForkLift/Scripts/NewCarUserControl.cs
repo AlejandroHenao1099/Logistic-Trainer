@@ -6,6 +6,7 @@ public class NewCarUserControl : MonoBehaviour
     private NewCarController m_Car; // the car controller we want to use
 
     public float axisVertical;
+    public float axisHorizontal;
 
     private void Awake()
     {
@@ -19,8 +20,8 @@ public class NewCarUserControl : MonoBehaviour
         // float h = Input.GetAxis("Horizontal");
         // float v = Input.GetAxis("Vertical");
 
-        
-        m_Car.Move(0, axisVertical, axisVertical, 0);
+
+        m_Car.Move(axisHorizontal, axisVertical, axisVertical, 0);
 
 
         // #if !MOBILE_INPUT

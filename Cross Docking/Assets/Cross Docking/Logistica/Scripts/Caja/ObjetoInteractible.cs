@@ -4,12 +4,12 @@ namespace Cross_Docking
 {
     public enum TipoDeAgarre
     {
-        UnaMano, DosManos, Ambos
+        UnaMano, DosManos, Ambos, Ninguno
     }
 
     public enum TipoDeMovilidad
     {
-        Libre, SoloRotacion
+        Libre, SoloRotacion, Ninguno
     }
 
     public class ObjetoInteractible : MonoBehaviour
@@ -19,5 +19,15 @@ namespace Cross_Docking
 
         [Tooltip("Determina si el objeto esta fijo, o si se puede mover")]
         public TipoDeMovilidad tipoDeMovilidadObjeto = TipoDeMovilidad.Libre;
+
+        public virtual void Iniciar()
+        {
+
+        }
+
+        public virtual void Detener()
+        {
+            
+        }
     }
 }
