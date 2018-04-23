@@ -29,6 +29,11 @@ namespace Cross_Docking
             izquierda.OnGrabObjTwoControl += VerificarManos;
             derecha.OnGrabObjOneControl += AgarrarObjetoUnaMano;
             izquierda.OnGrabObjOneControl += AgarrarObjetoUnaMano;
+
+            derecha.GetComponent<LaserPointer>().OnGrabCar += DejarDeTeletransportar;
+            izquierda.GetComponent<LaserPointer>().OnGrabCar += DejarDeTeletransportar;
+            derecha.GetComponent<LaserPointer>().OnReleaseCar += Teletransportar;
+            izquierda.GetComponent<LaserPointer>().OnReleaseCar += Teletransportar;
         }
 
         private void Update()
@@ -40,9 +45,10 @@ namespace Cross_Docking
             VerificarAgarreObjeto();
         }
 
-        private void AgarrarObjetoUnaMano(ObjetoInteractible interactible)
+        private void AgarrarObjetoUnaMano(ObjetoInteractible interactible, Transform manoEnviadora)
         {
-            
+            manoEnviadora.GetComponent<Mano>().OnReleaseObjOneControl = interactible.Detener;
+            interactible.Iniciar(manoEnviadora);
         }
 
         private void VerificarManos(ObjetoInteractible interactible)
@@ -101,6 +107,18 @@ namespace Cross_Docking
             objetoEnMano = false;
             tipoDeMovilidad = TipoDeMovilidad.Ninguno;
             objetoInteractible = null;
+        }
+
+        private void DejarDeTeletransportar()
+        {
+            derecha.GetComponent<LaserPointer>().teletransportar = false;
+            izquierda.GetComponent<LaserPointer>().teletransportar = false;
+        }
+
+        private void Teletransportar()
+        {
+            derecha.GetComponent<LaserPointer>().teletransportar = true;
+            izquierda.GetComponent<LaserPointer>().teletransportar = true;
         }
     }
 }

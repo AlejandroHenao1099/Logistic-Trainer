@@ -1,9 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Cross_Docking
 {
     public class LaserPointer : MonoBehaviour
     {
+        public Action OnGrabCar;
+        public Action OnReleaseCar;
+
         private ControladorInput controladorInput;
         private PosicionarJugador refAuto;
 
@@ -20,7 +24,7 @@ namespace Cross_Docking
         private Vector3 hitPoint; // Point where the raycast hits
         private bool shouldTeleport; // True if there's a valid teleport target
         private bool montarAuto;
-        private bool teletransportar = true;
+        public bool teletransportar = true;
 
         private void Awake()
         {
@@ -51,8 +55,9 @@ namespace Cross_Docking
                     Teleport();
                 else if (montarAuto)
                 {
-                    DesactivarTeletransportacion();
-                    refAuto.OnEndCar += ActivarTeletransportacion;
+                    OnGrabCar();
+                    //DesactivarTeletransportacion();
+                    refAuto.OnEndCar = ActivarTeletransportacion;
                     refAuto.Comenzar();
                 }
             }
@@ -104,22 +109,18 @@ namespace Cross_Docking
 
         private void Teleport()
         {
-            shouldTeleport = false; // Teleport in progress, no need to do it again until the next touchpad release
-            reticle.SetActive(false); // Hide reticle
-            Vector3 difference = cameraRigTransform.position - headTransform.position; // Calculate the difference between the center of the virtual room & the player's head
-            difference.y = 0; // Don't change the final position's y position, it should always be equal to that of the hit point
+            shouldTeleport = false;
+            reticle.SetActive(false);
+            Vector3 difference = cameraRigTransform.position - headTransform.position;
+            difference.y = 0;
 
-            cameraRigTransform.position = hitPoint + difference; // Change the camera rig position to where the the teleport reticle was. Also add the difference so the new virtual room position is relative to the player position, allowing the player's new position to be exactly where they pointed. (see illustration)
-        }
-
-        private void DesactivarTeletransportacion()
-        {
-            teletransportar = false;
+            cameraRigTransform.position = hitPoint + difference;
         }
 
         private void ActivarTeletransportacion()
         {
             teletransportar = true;
+            OnReleaseCar();
         }
     }
 }

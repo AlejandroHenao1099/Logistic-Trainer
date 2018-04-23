@@ -19,6 +19,8 @@ namespace Cross_Docking
         private Transform derecha;
         private Transform cabeza;
 
+        [HideInInspector] public float valorY;
+
         private ControladorInput inputDerecho;
         private ControladorInput inputIzquierdo;
 
@@ -58,14 +60,14 @@ namespace Cross_Docking
 
         private void ObtenerInputGirar()
         {
-            float valorY = volante.anguloY;
-            if (valorY >= 150f)
-                valorY = 150f;
-            else if (valorY <= -150f)
-                valorY = -150f;
+            float valor = volante.anguloY;
+            if (valor >= 90f)
+                valor = 90f;
+            else if (valor <= -90f)
+                valor = -90f;
 
-            float rotacionVolante = valorY / 150f;
-            controladorCarro.axisHorizontal = -rotacionVolante;
+            valorY = -(valor / 90f);
+            controladorCarro.axisHorizontal = valorY;
         }
 
         public void Comenzar()

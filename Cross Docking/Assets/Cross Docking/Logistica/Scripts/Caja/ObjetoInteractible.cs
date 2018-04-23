@@ -20,14 +20,9 @@ namespace Cross_Docking
         [Tooltip("Determina si el objeto esta fijo, o si se puede mover")]
         public TipoDeMovilidad tipoDeMovilidadObjeto = TipoDeMovilidad.Libre;
 
-        public virtual void Iniciar()
-        {
+        public virtual void Iniciar() { }
+        public virtual void Iniciar(Transform mano) { }
 
-        }
-
-        public virtual void Detener()
-        {
-            
-        }
+        public virtual void Detener() { }
     }
 }

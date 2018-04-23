@@ -6,6 +6,7 @@ namespace Cross_Docking
     {
         private Transform direccionVolante;
         private Transform padreVolante;
+        //HideInInspecto sirve para que no se vea en esta mierrda de aca ->
         [HideInInspector] public Transform derecha, izquierda;
 
         [HideInInspector] public float anguloY;
@@ -54,12 +55,13 @@ namespace Cross_Docking
 
             padreVolante.rotation = Quaternion.LookRotation(direccionVer);
 
-            anguloY = Vector3.SignedAngle(direccionVolante.forward, transform.forward, direccionVolante.up);
-
             Vector3 eulerRotacion = padreVolante.rotation.eulerAngles;
             eulerRotacion.x = 0f;
             Quaternion rotacionFinal = Quaternion.Euler(eulerRotacion);
             padreVolante.localRotation = rotacionFinal;
+
+            anguloY = Vector3.SignedAngle(direccionVolante.forward, transform.forward, transform.up);
+
         }
 
         private void VerificarControles(Transform objetoEntrante)

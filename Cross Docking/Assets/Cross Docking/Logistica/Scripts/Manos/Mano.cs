@@ -12,7 +12,8 @@ namespace Cross_Docking
         private TipoObjetoMano tipoObjetoMano;
         private ControladorInput controladorInput;
         public Action<ObjetoInteractible> OnGrabObjTwoControl;
-        public Action<ObjetoInteractible> OnGrabObjOneControl;
+        public Action<ObjetoInteractible, Transform> OnGrabObjOneControl;
+        public Action OnReleaseObjOneControl;
         public GameObject objetoEnMano { get; set; }
         private Transform objetoEstatico;
 
@@ -87,9 +88,9 @@ namespace Cross_Docking
 
             if (objetoEnMano.GetComponent<ObjetoInteractible>().tipoDeMovilidadObjeto == TipoDeMovilidad.Libre)
             {
-                OnGrabObjOneControl(objetoEnMano.GetComponent<ObjetoInteractible>());
-                FixedJoint fixedJoint = AgregarFixedJoint();
-                fixedJoint.connectedBody = objetoEnMano.GetComponent<Rigidbody>();
+                OnGrabObjOneControl(objetoEnMano.GetComponent<ObjetoInteractible>(), transform);
+                // FixedJoint fixedJoint = AgregarFixedJoint();
+                // fixedJoint.connectedBody = objetoEnMano.GetComponent<Rigidbody>();
             }
             else
             {
@@ -98,13 +99,13 @@ namespace Cross_Docking
             }
         }
 
-        private FixedJoint AgregarFixedJoint()
-        {
-            FixedJoint fx = gameObject.AddComponent<FixedJoint>();
-            fx.breakForce = 20000f;
-            fx.breakTorque = 20000f;
-            return fx;
-        }
+        // private FixedJoint AgregarFixedJoint()
+        // {
+        //     FixedJoint fx = gameObject.AddComponent<FixedJoint>();
+        //     fx.breakForce = 20000f;
+        //     fx.breakTorque = 20000f;
+        //     return fx;
+        // }
 
         private void AgarrarObjetoAmbasManos(ObjetoInteractible interactible)
         {
@@ -118,16 +119,17 @@ namespace Cross_Docking
         {
             if (objetoEnMano.GetComponent<ObjetoInteractible>().tipoDeMovilidadObjeto == TipoDeMovilidad.Libre)
             {
-                if (GetComponent<FixedJoint>())
-                {
-                    GetComponent<FixedJoint>().connectedBody = null;
-                    Destroy(GetComponent<FixedJoint>());
-                    Vector3 velocidad = controladorInput.Controller.velocity;
-                    velocidad.x = -velocidad.x;
-                    velocidad.z = -velocidad.z;
-                    objetoEnMano.GetComponent<Rigidbody>().velocity = velocidad;
-                    objetoEnMano.GetComponent<Rigidbody>().angularVelocity = -controladorInput.Controller.angularVelocity;
-                }
+                OnReleaseObjOneControl();
+                // if (GetComponent<FixedJoint>())
+                // {
+                //     GetComponent<FixedJoint>().connectedBody = null;
+                //     Destroy(GetComponent<FixedJoint>());
+                //     Vector3 velocidad = controladorInput.Controller.velocity;
+                //     velocidad.x = -velocidad.x;
+                //     velocidad.z = -velocidad.z;
+                //     objetoEnMano.GetComponent<Rigidbody>().velocity = velocidad;
+                //     objetoEnMano.GetComponent<Rigidbody>().angularVelocity = -controladorInput.Controller.angularVelocity;
+                // }
             }
             else
             {
