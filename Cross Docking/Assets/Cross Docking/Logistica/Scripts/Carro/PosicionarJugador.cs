@@ -65,14 +65,11 @@ namespace Cross_Docking
                 valorY = -150f;
 
             float rotacionVolante = valorY / 150f;
-            rotacionVolante /= 2f;
-
             controladorCarro.axisHorizontal = -rotacionVolante;
         }
 
         public void Comenzar()
         {
-            cameraRig.rotation = posicionJugador.rotation;
             Vector3 difference = cameraRig.position - cabeza.position;
             difference.y = 0;
 

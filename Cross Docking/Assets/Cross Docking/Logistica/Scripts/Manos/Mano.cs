@@ -11,7 +11,8 @@ namespace Cross_Docking
         }
         private TipoObjetoMano tipoObjetoMano;
         private ControladorInput controladorInput;
-        public Action<ObjetoInteractible> OnHandReady;
+        public Action<ObjetoInteractible> OnGrabObjTwoControl;
+        public Action<ObjetoInteractible> OnGrabObjOneControl;
         public GameObject objetoEnMano { get; set; }
         private Transform objetoEstatico;
 
@@ -45,6 +46,11 @@ namespace Cross_Docking
         {
             ObjetoInteractible interactible = objetoColisionando.transform.GetComponent<ObjetoInteractible>();
 
+            if (interactible == null)
+                interactible = objetoColisionando.GetComponentInParent<ObjetoInteractible>();
+            if (interactible == null)
+                interactible = objetoColisionando.GetComponentInChildren<ObjetoInteractible>();
+
             if (interactible != null && interactible.tipoDeAgarreObjeto == TipoDeAgarre.DosManos)
                 AgarrarObjetoDosManos(interactible);
             else if (interactible != null && interactible.tipoDeAgarreObjeto == TipoDeAgarre.UnaMano)
@@ -63,7 +69,7 @@ namespace Cross_Docking
         {
             manoLista = true;
             objetoEnMano = interactible.gameObject;
-            OnHandReady(interactible);
+            OnGrabObjTwoControl(interactible);
             tipoObjetoMano = TipoObjetoMano.DosManos;
         }
 
@@ -81,6 +87,7 @@ namespace Cross_Docking
 
             if (objetoEnMano.GetComponent<ObjetoInteractible>().tipoDeMovilidadObjeto == TipoDeMovilidad.Libre)
             {
+                OnGrabObjOneControl(objetoEnMano.GetComponent<ObjetoInteractible>());
                 FixedJoint fixedJoint = AgregarFixedJoint();
                 fixedJoint.connectedBody = objetoEnMano.GetComponent<Rigidbody>();
             }

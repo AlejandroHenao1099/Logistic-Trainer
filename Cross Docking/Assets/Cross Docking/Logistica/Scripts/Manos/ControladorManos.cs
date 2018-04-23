@@ -25,8 +25,10 @@ namespace Cross_Docking
             posicionDerecha = derecha.transform;
             posicionIzquierda = izquierda.transform;
             controladorPosicionManos = GetComponent<ControladorPosicionManos>();
-            derecha.OnHandReady += VerificarManos;
-            izquierda.OnHandReady += VerificarManos;
+            derecha.OnGrabObjTwoControl += VerificarManos;
+            izquierda.OnGrabObjTwoControl += VerificarManos;
+            derecha.OnGrabObjOneControl += AgarrarObjetoUnaMano;
+            izquierda.OnGrabObjOneControl += AgarrarObjetoUnaMano;
         }
 
         private void Update()
@@ -36,6 +38,11 @@ namespace Cross_Docking
 
             VerificarInputs();
             VerificarAgarreObjeto();
+        }
+
+        private void AgarrarObjetoUnaMano(ObjetoInteractible interactible)
+        {
+            
         }
 
         private void VerificarManos(ObjetoInteractible interactible)

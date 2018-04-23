@@ -8,7 +8,7 @@ namespace Cross_Docking
         private Transform padreVolante;
         [HideInInspector] public Transform derecha, izquierda;
 
-        public float anguloY;
+        [HideInInspector] public float anguloY;
         private bool derechaLista, izquierdaLista;
         private bool manejando;
 
@@ -54,9 +54,7 @@ namespace Cross_Docking
 
             padreVolante.rotation = Quaternion.LookRotation(direccionVer);
 
-            //anguloY = direccionVolante.localRotation.eulerAngles.y;
-            float angulo = Vector3.SignedAngle(direccionVolante.forward, transform.forward, direccionVolante.up);
-            anguloY = angulo;
+            anguloY = Vector3.SignedAngle(direccionVolante.forward, transform.forward, direccionVolante.up);
 
             Vector3 eulerRotacion = padreVolante.rotation.eulerAngles;
             eulerRotacion.x = 0f;
