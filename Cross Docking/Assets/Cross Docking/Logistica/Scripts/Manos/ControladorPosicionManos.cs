@@ -36,7 +36,7 @@ namespace Cross_Docking
             {
                 if (!cajaPosicionada)
                 {
-                    objetoAMover = objeto.root;
+                    objetoAMover = objeto.parent;
                     objetoAMover.GetComponent<Rigidbody>().isKinematic = true;
                     actualizando = true;
 
@@ -48,10 +48,16 @@ namespace Cross_Docking
             }
             else
             {
-                objetoAMover = objeto;
-                actualizando = true;
-                // Comenzar();
+                if (!cajaPosicionada)
+                {
+                    objetoAMover = objeto;
+                    actualizando = true;
+                    cajaPosicionada = true;
+
+                    Comenzar();
+                }
             }
+
         }
 
         public void DesactivarActualizacion()
@@ -75,8 +81,13 @@ namespace Cross_Docking
             }
             else
             {
-                //Terminar();
-                actualizando = false;
+                if (cajaPosicionada)
+                {
+                    Terminar();
+                    actualizando = false;
+                    objetoAMover = null;
+                    cajaPosicionada = false;
+                }
             }
         }
 
@@ -105,12 +116,12 @@ namespace Cross_Docking
 
         private void CalcularDireccion()
         {
-            
+
         }
 
 
 
-        
+
         private Cuadrantes cuadranteDerecha;
         private Cuadrantes cuadranteIzquierda;
         private Transform padreCubo, cubo;
@@ -318,9 +329,10 @@ namespace Cross_Docking
 
         private bool InterRotacionCubo()
         {
+            if (cubo == null) return true;
             Quaternion interpolacion = Quaternion.Slerp(cubo.rotation, padreCubo.rotation, interpolacionCubo);
             cubo.rotation = interpolacion;
-            interpolacionCubo += 0.005f;
+            interpolacionCubo += 0.01f;
             if (interpolacionCubo >= 1)
             {
                 interpolacionCubo = 1;
@@ -329,6 +341,6 @@ namespace Cross_Docking
                 return true;
             }
             return false;
-        }
+        } 
     }
 }

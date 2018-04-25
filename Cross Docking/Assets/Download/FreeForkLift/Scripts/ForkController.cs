@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
+using Cross_Docking;
 
 public class ForkController : MonoBehaviour
 {
-
     public Transform fork;
     public Transform mast;
     public float speedTranslate; //Platform travel speed
@@ -13,51 +13,60 @@ public class ForkController : MonoBehaviour
 
     private bool mastMoveTrue = false; //Activate or deactivate the movement of the mast
 
+    public ControladorInput controladorInput;
+
+
     private void FixedUpdate()
     {
-        if (fork.transform.position.y >= maxYmast.y)
+        if (fork.localPosition.y >= maxYmast.y)
         {
             mastMoveTrue = true;
         }
-        if (fork.transform.position.y <= maxYmast.y)
+        if (fork.localPosition.y <= maxYmast.y)
         {
             mastMoveTrue = false;
         }
-        if (fork.transform.position.y >= maxY.y)
+        if (fork.localPosition.y >= maxY.y)
         {
-            fork.transform.position = new Vector3(fork.transform.position.x, maxY.y, fork.transform.position.z);
+            fork.localPosition = new Vector3(fork.localPosition.x, maxY.y, fork.localPosition.z);
+        }
+        if (fork.localPosition.y <= minY.y)
+        {
+            fork.localPosition = new Vector3(fork.localPosition.x, minY.y, fork.localPosition.z);
         }
 
-        if (fork.transform.position.y <= minY.y)
+        Vector3 posicionRelativaMast = fork.InverseTransformPoint(mast.position);
+
+        //Me quede aqui
+
+        if (posicionRelativaMast.y >= maxYmast.y)
         {
-            fork.transform.position = new Vector3(fork.transform.position.x, minY.y, fork.transform.position.z);
-        }
-        if (mast.transform.position.y >= maxYmast.y)
-        {
-            mast.transform.position = new Vector3(mast.transform.position.x, maxYmast.y, mast.transform.position.z);
+            mast.transform.localPosition = new Vector3(mast.transform.position.x, maxYmast.y, mast.transform.position.z);
         }
 
-        if (mast.transform.position.y <= minYmast.y)
+        if (mast.transform.localPosition.y <= minYmast.y)
         {
             mast.transform.position = new Vector3(mast.transform.position.x, minYmast.y, mast.transform.position.z);
         }
 
-        // if (Input.GetKey(KeyCode.Alpha1))
-        // {
-        //     fork.Translate(Vector3.up * speedTranslate * Time.deltaTime);
-        //     if (mastMoveTrue)
-        //     {
-        //         mast.Translate(Vector3.up * speedTranslate * Time.deltaTime);
-        //     }
+        Vector2 presTouchPad = controladorInput.Controller.GetAxis();
 
-        // }
-        // if (Input.GetKey(KeyCode.Alpha0))
-        // {
-        //     fork.Translate(-Vector3.up * speedTranslate * Time.deltaTime);
-        //     if (mastMoveTrue)
-        //     {
-        //         mast.Translate(-Vector3.up * speedTranslate * Time.deltaTime);
-        //     }
-        // }
+        if (presTouchPad.y > 0f)
+        {
+            fork.Translate(Vector3.up * speedTranslate * Time.deltaTime);
+            if (mastMoveTrue)
+            {
+                mast.Translate(Vector3.up * speedTranslate * Time.deltaTime);
+            }
+
+        }
+        if (presTouchPad.y < 0f)
+        {
+            fork.Translate(-Vector3.up * speedTranslate * Time.deltaTime);
+            if (mastMoveTrue)
+            {
+                mast.Translate(-Vector3.up * speedTranslate * Time.deltaTime);
+            }
+        }
     }
 }
