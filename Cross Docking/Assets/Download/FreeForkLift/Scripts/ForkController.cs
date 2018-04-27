@@ -13,45 +13,42 @@ public class ForkController : MonoBehaviour
 
     private bool mastMoveTrue = false; //Activate or deactivate the movement of the mast
 
-    public ControladorInput controladorInput;
+    public Vector2 axis = Vector2.zero;
 
 
     private void FixedUpdate()
     {
-        if (fork.localPosition.y >= maxYmast.y)
+        Vector3 posicionRelativafork = fork.parent.InverseTransformPoint(fork.position);
+        Vector3 posicionRelativaMast = fork.parent.InverseTransformPoint(mast.position);
+
+        if (posicionRelativafork.y >= maxYmast.y)
         {
             mastMoveTrue = true;
         }
-        if (fork.localPosition.y <= maxYmast.y)
+        if (posicionRelativafork.y <= maxYmast.y)
         {
             mastMoveTrue = false;
         }
-        if (fork.localPosition.y >= maxY.y)
+        if (posicionRelativafork.y >= maxY.y)
         {
             fork.localPosition = new Vector3(fork.localPosition.x, maxY.y, fork.localPosition.z);
         }
-        if (fork.localPosition.y <= minY.y)
+        if (posicionRelativafork.y <= minY.y)
         {
             fork.localPosition = new Vector3(fork.localPosition.x, minY.y, fork.localPosition.z);
         }
 
-        Vector3 posicionRelativaMast = fork.InverseTransformPoint(mast.position);
-
-        //Me quede aqui
-
         if (posicionRelativaMast.y >= maxYmast.y)
         {
-            mast.transform.localPosition = new Vector3(mast.transform.position.x, maxYmast.y, mast.transform.position.z);
+            mast.transform.localPosition = new Vector3(mast.localPosition.x, maxYmast.y, mast.transform.localPosition.z);
         }
 
-        if (mast.transform.localPosition.y <= minYmast.y)
+        if (mast.localPosition.y <= minYmast.y)
         {
-            mast.transform.position = new Vector3(mast.transform.position.x, minYmast.y, mast.transform.position.z);
+            mast.transform.localPosition = new Vector3(mast.localPosition.x, minYmast.y, mast.transform.localPosition.z);
         }
 
-        Vector2 presTouchPad = controladorInput.Controller.GetAxis();
-
-        if (presTouchPad.y > 0f)
+        if (axis.y > 0f)
         {
             fork.Translate(Vector3.up * speedTranslate * Time.deltaTime);
             if (mastMoveTrue)
@@ -60,7 +57,7 @@ public class ForkController : MonoBehaviour
             }
 
         }
-        if (presTouchPad.y < 0f)
+        if (axis.y < 0f)
         {
             fork.Translate(-Vector3.up * speedTranslate * Time.deltaTime);
             if (mastMoveTrue)

@@ -10,6 +10,7 @@ namespace Cross_Docking
         [Header("Carro")]
         public Transform carro;
         private NewCarUserControl controladorCarro;
+        private ForkController controladorGrua;
         public Transform posicionJugador;
         public Volante volante;
 
@@ -35,6 +36,7 @@ namespace Cross_Docking
             inputIzquierdo = izquierda.GetComponent<ControladorInput>();
 
             controladorCarro = carro.GetComponent<NewCarUserControl>();
+            controladorGrua = controladorCarro.GetComponent<ForkController>();
             volante.derecha = derecha;
             volante.izquierda = izquierda;
         }
@@ -46,6 +48,7 @@ namespace Cross_Docking
 
             ObtenerInputAcelerador();
             ObtenerInputGirar();
+            ObtenerInputGrua();
 
             if (inputDerecho.Controller.GetPressDown(SteamVR_Controller.ButtonMask.Grip) || inputIzquierdo.Controller.GetPressDown(SteamVR_Controller.ButtonMask.Grip))
                 SalirAuto();
@@ -68,6 +71,11 @@ namespace Cross_Docking
 
             valorY = -(valor / 90f);
             controladorCarro.axisHorizontal = valorY;
+        }
+
+        private void ObtenerInputGrua()
+        {
+            controladorGrua.axis = inputDerecho.Controller.GetAxis();
         }
 
         public void Comenzar()
