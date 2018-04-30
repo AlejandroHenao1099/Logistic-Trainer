@@ -15,12 +15,10 @@ namespace Cross_Docking
         public Action<ObjetoInteractible, Transform> OnGrabObjOneControl;
         public Action OnReleaseObjOneControl;
         public GameObject objetoEnMano { get; set; }
-        private Transform objetoEstatico;
 
         private GameObject objetoColisionando;
 
         public bool manoLista { get; private set; }
-        private bool actualizarObjetoNoMovible;
 
         private void Awake()
         {
@@ -36,26 +34,20 @@ namespace Cross_Docking
             if (controladorInput.Controller.GetHairTriggerUp())
                 if (objetoEnMano)
                     DeterminarSoltarObjeto();
-
-            if (!actualizarObjetoNoMovible)
-                return;
-
-            ActualizarRotacionObjetoNoMovible();
         }
 
         private void DeterminarAgarreObjeto()
         {
             ObjetoInteractible interactible = objetoColisionando.transform.GetComponent<ObjetoInteractible>();
 
-            if (interactible == null)
-                interactible = objetoColisionando.GetComponentInParent<ObjetoInteractible>();
-            if (interactible == null)
-                interactible = objetoColisionando.GetComponentInChildren<ObjetoInteractible>();
-
-            if (interactible != null && interactible.tipoDeAgarreObjeto == TipoDeAgarre.DosManos)
+            if (interactible.tipoDeAgarreObjeto == TipoDeAgarre.DosManos)
                 AgarrarObjetoDosManos(interactible);
-            else if (interactible != null && interactible.tipoDeAgarreObjeto == TipoDeAgarre.UnaMano)
-                AgarrarObjetoUnaMano();
+
+            else if (interactible.tipoDeAgarreObjeto == TipoDeAgarre.UnaMano)
+            {
+                if (interactible.objetoDisponible)
+                    AgarrarObjetoUnaMano();
+            }
             // else if (interactible != null && interactible.tipoDeAgarreObjeto == TipoDeAgarre.Ambos)
             //     AgarrarObjetoAmbasManos(interactible);
         }
@@ -86,26 +78,12 @@ namespace Cross_Docking
             objetoEnMano = objetoColisionando;
             objetoColisionando = null;
 
-            if (objetoEnMano.GetComponent<ObjetoInteractible>().tipoDeMovilidadObjeto == TipoDeMovilidad.Libre)
-            {
-                OnGrabObjOneControl(objetoEnMano.GetComponent<ObjetoInteractible>(), transform);
-                // FixedJoint fixedJoint = AgregarFixedJoint();
-                // fixedJoint.connectedBody = objetoEnMano.GetComponent<Rigidbody>();
-            }
-            else
-            {
-                objetoEstatico = objetoEnMano.transform;
-                actualizarObjetoNoMovible = true;
-            }
-        }
 
-        // private FixedJoint AgregarFixedJoint()
-        // {
-        //     FixedJoint fx = gameObject.AddComponent<FixedJoint>();
-        //     fx.breakForce = 20000f;
-        //     fx.breakTorque = 20000f;
-        //     return fx;
-        // }
+            if (objetoEnMano.GetComponent<ObjetoInteractible>().tipoDeMovilidadObjeto == TipoDeMovilidad.Libre)
+                OnGrabObjOneControl(objetoEnMano.GetComponent<ObjetoInteractible>(), transform);
+            else
+                OnGrabObjOneControl(objetoEnMano.GetComponent<ObjetoInteractible>(), transform);
+        }
 
         private void AgarrarObjetoAmbasManos(ObjetoInteractible interactible)
         {
@@ -117,41 +95,9 @@ namespace Cross_Docking
 
         private void SoltarObjetoUnaMano()
         {
-            if (objetoEnMano.GetComponent<ObjetoInteractible>().tipoDeMovilidadObjeto == TipoDeMovilidad.Libre)
-            {
-                OnReleaseObjOneControl();
-                // if (GetComponent<FixedJoint>())
-                // {
-                //     GetComponent<FixedJoint>().connectedBody = null;
-                //     Destroy(GetComponent<FixedJoint>());
-                //     Vector3 velocidad = controladorInput.Controller.velocity;
-                //     velocidad.x = -velocidad.x;
-                //     velocidad.z = -velocidad.z;
-                //     objetoEnMano.GetComponent<Rigidbody>().velocity = velocidad;
-                //     objetoEnMano.GetComponent<Rigidbody>().angularVelocity = -controladorInput.Controller.angularVelocity;
-                // }
-            }
-            else
-            {
-                objetoEnMano.GetComponent<Rigidbody>().angularVelocity = -controladorInput.Controller.angularVelocity;
-                actualizarObjetoNoMovible = false;
-                objetoEstatico = null;
-            }
-
+            OnReleaseObjOneControl();
             tipoObjetoMano = TipoObjetoMano.Ninguno;
             objetoEnMano = null;
-        }
-
-        private void ActualizarRotacionObjetoNoMovible()
-        {
-            Vector3 targetDelta = transform.position - objetoEstatico.position;
-            targetDelta.y = 0;
-
-            float diferenciaDeAngulo = Vector3.Angle(objetoEstatico.forward, targetDelta);
-
-            Vector3 cross = Vector3.Cross(objetoEstatico.forward, targetDelta);
-
-            objetoEstatico.GetComponent<Rigidbody>().angularVelocity = cross * diferenciaDeAngulo * 50f;
         }
 
         private void EstablecerObjetoColisionando(Collider col)

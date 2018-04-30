@@ -7,8 +7,8 @@ namespace Cross_Docking
         [SerializeField] private Mano derecha;
         [SerializeField] private Mano izquierda;
 
-        [SerializeField] private ControladorInput inputDerecha;
-        [SerializeField] private ControladorInput inputIzquierdo;
+        private ControladorInput inputDerecha;
+        private ControladorInput inputIzquierdo;
         private ControladorPosicionManos controladorPosicionManos;
 
         private Transform posicionDerecha;
@@ -22,6 +22,8 @@ namespace Cross_Docking
 
         private void Awake()
         {
+            inputDerecha = derecha.GetComponent<ControladorInput>();
+            inputIzquierdo = izquierda.GetComponent<ControladorInput>();
             posicionDerecha = derecha.transform;
             posicionIzquierda = izquierda.transform;
             controladorPosicionManos = GetComponent<ControladorPosicionManos>();

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Cross_Docking
@@ -15,7 +16,7 @@ namespace Cross_Docking
 
         private void Update()
         {
-            texto.text = "Axi = " + posicionarJugador.valorY;
+            texto.text = "Axi = " + Math.Round(posicionarJugador.valorY, 2);
         }
     }
 }

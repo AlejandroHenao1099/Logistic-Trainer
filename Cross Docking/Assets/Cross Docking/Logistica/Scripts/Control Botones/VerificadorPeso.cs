@@ -1,20 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class VerificadorPeso : MonoBehaviour 
+namespace Cross_Docking
 {
-	public int peso;
+    public class VerificadorPeso : MonoBehaviour
+    {
+        public int peso;
 
-	private void OnCollisionEnter(Collision other)
-	{
-		if(peso == other.gameObject.GetComponent<Rigidbody>().mass)
-		{
-			print("Pesos Iguales");
-		}
-		else 
-		{
-			print("El peso no es similar");
-		}
-	}
+        private void OnCollisionEnter(Collision other)
+        {
+            ObjetoInteractible objetoInteractible = other.transform.GetComponentInChildren<ObjetoInteractible>();
+            if (objetoInteractible != null)
+            {
+                if (peso == objetoInteractible.GetComponentInParent<Rigidbody>().mass)
+                    print("Pesos Iguales");
+                else
+                    print("El peso no es similar");
+            }
+        }
+    }
 }

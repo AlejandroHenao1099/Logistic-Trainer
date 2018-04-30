@@ -6,8 +6,9 @@ namespace Cross_Docking
     {
         private Transform direccionVolante;
         private Transform padreVolante;
-        //HideInInspecto sirve para que no se vea en esta mierrda de aca ->
+
         [HideInInspector] public Transform derecha, izquierda;
+        private ControladorInput controlDerecha, controlIzquierdo;
 
         [HideInInspector] public float anguloY;
         private bool derechaLista, izquierdaLista;
@@ -15,6 +16,8 @@ namespace Cross_Docking
 
         private void Start()
         {
+            controlDerecha = derecha.GetComponent<ControladorInput>();
+            controlIzquierdo = izquierda.GetComponent<ControladorInput>();
             direccionVolante = transform.GetChild(0).GetChild(0);
             padreVolante = transform.GetChild(0);
         }
@@ -61,7 +64,8 @@ namespace Cross_Docking
             padreVolante.localRotation = rotacionFinal;
 
             anguloY = Vector3.SignedAngle(direccionVolante.forward, transform.forward, transform.up);
-
+            controlDerecha.Controller.TriggerHapticPulse(75);
+            controlIzquierdo.Controller.TriggerHapticPulse(75);
         }
 
         private void VerificarControles(Transform objetoEntrante)

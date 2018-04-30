@@ -119,7 +119,6 @@ namespace Cross_Docking
                 else if (direccionUp == DireccionUp.Abajo)
                     VerificarAnguloCartesianoEjeYInverso();
 
-                //Vector3 direccion = (manoDerecha.position - manoIzquierda.position).normalized;
                 Vector3 arriba = Quaternion.Euler(ejeRotacion.normalized) * direccion;
                 Quaternion rotacionRelativa = Quaternion.LookRotation(direccion, arriba);
                 if (interpolar)
@@ -129,7 +128,6 @@ namespace Cross_Docking
             }
             else
             {
-                //Vector3 direccion = (manoDerecha.position - manoIzquierda.position).normalized;
                 Quaternion rotacionRelativa = Quaternion.LookRotation(direccion, objetoMovible.up);
                 objetoMovible.rotation = Quaternion.Slerp(objetoMovible.rotation, rotacionRelativa, Time.deltaTime * 10f);
             }
@@ -137,7 +135,6 @@ namespace Cross_Docking
 
         private void PoderVerificar()
         {
-            //Vector3 direccion = (manoDerecha.position - manoIzquierda.position).normalized;
             punto = Vector3.Dot(direccion, Vector3.up);
 
             if (punto >= puntoLimite || punto <= -puntoLimite)
@@ -189,7 +186,7 @@ namespace Cross_Docking
 
         private void VerificarAnguloCartesianoGlobalEjeY()
         {
-            Vector3 direccionY = direccion;//(manoDerecha.position - manoIzquierda.position).normalized;
+            Vector3 direccionY = direccion;
             direccionY.y = 0;
             anguloEjeY = Vector3.SignedAngle(direccionY, Vector3.forward, Vector3.up);
 
@@ -245,21 +242,21 @@ namespace Cross_Docking
 
         private void VerificarAnguloCartesianoEjeZ()
         {
-            Vector3 direccionZ = direccion;// (manoDerecha.position - manoIzquierda.position).normalized;
+            Vector3 direccionZ = direccion;
             direccionZ.z = 0;
             anguloEjeZ = Vector3.SignedAngle(direccionZ, Vector3.up, -Vector3.forward);
         }
 
         private void VerificarAnguloCartesianoEjeX()
         {
-            Vector3 direccionX = direccion;// (manoDerecha.position - manoIzquierda.position).normalized;
+            Vector3 direccionX = direccion;
             direccionX.x = 0;
             anguloEjeX = Vector3.SignedAngle(direccionX, Vector3.up, Vector3.right);
         }
 
         private void VerificarAnguloCartesianoEjeYInverso()
         {
-            Vector3 direccionInversaY = direccion;// (manoDerecha.position - manoIzquierda.position).normalized;
+            Vector3 direccionInversaY = direccion;
             direccionInversaY.y = 0;
             anguloEjeY = Vector3.SignedAngle(direccionInversaY, Vector3.forward, Vector3.up);
 
