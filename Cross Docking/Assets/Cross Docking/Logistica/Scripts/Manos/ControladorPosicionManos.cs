@@ -53,7 +53,6 @@ namespace Cross_Docking
 
         private float ultimoAnguloZ;
         private float ultimoAnguloX;
-        private float valorY;
 
         [Range(0f, 0.95f)]
         public float puntoLimite = 0.8f;
@@ -203,8 +202,8 @@ namespace Cross_Docking
         private void ActualizarEjeCuadranteI(float angulo)
         {
             float interpolacion = Mathf.Abs(angulo) / 90f;
-            Vector3 vectorEjeX = new Vector3(-90f, valorY, 0f);
-            Vector3 vectorEjeZ = new Vector3(0f, valorY, 90f);
+            Vector3 vectorEjeX = new Vector3(-90f, 0f, 0f);
+            Vector3 vectorEjeZ = new Vector3(0f, 0f, 90f);
 
             Vector3 vectorFinal = Vector3.Lerp(vectorEjeX, vectorEjeZ, interpolacion);
             ejeRotacion = vectorFinal;
@@ -213,8 +212,8 @@ namespace Cross_Docking
         private void ActualizarEjeCuadranteII(float angulo)
         {
             float interpolacion = Mathf.Abs(angulo) / 90f;
-            Vector3 vectorEjeX = new Vector3(-90f, valorY, 0f);
-            Vector3 vectorEjeZ = new Vector3(0f, valorY, -90f);
+            Vector3 vectorEjeX = new Vector3(-90f, 0f, 0f);
+            Vector3 vectorEjeZ = new Vector3(0f, 0f, -90f);
 
             Vector3 vectorFinal = Vector3.Lerp(vectorEjeX, vectorEjeZ, interpolacion);
             ejeRotacion = vectorFinal;
@@ -223,8 +222,8 @@ namespace Cross_Docking
         private void ActualizarEjeCuadranteIII(float angulo)
         {
             float interpolacion = (Mathf.Abs(angulo) - 90f) / 90f;
-            Vector3 vectorEjeX = new Vector3(90f, valorY, 0f);
-            Vector3 vectorEjeZ = new Vector3(0f, valorY, -90f);
+            Vector3 vectorEjeX = new Vector3(90f, 0f, 0f);
+            Vector3 vectorEjeZ = new Vector3(0f, 0f, -90f);
 
             Vector3 vectorFinal = Vector3.Lerp(vectorEjeZ, vectorEjeX, interpolacion);
             ejeRotacion = vectorFinal;
@@ -233,8 +232,8 @@ namespace Cross_Docking
         private void ActualizarEjeCuadranteIV(float angulo)
         {
             float interpolacion = (Mathf.Abs(angulo) - 90f) / 90f;
-            Vector3 vectorEjeX = new Vector3(90f, valorY, 0f);
-            Vector3 vectorEjeZ = new Vector3(0f, valorY, 90f);
+            Vector3 vectorEjeX = new Vector3(90f, 0f, 0f);
+            Vector3 vectorEjeZ = new Vector3(0f, 0f, 90f);
 
             Vector3 vectorFinal = Vector3.Lerp(vectorEjeZ, vectorEjeX, interpolacion);
             ejeRotacion = vectorFinal;
@@ -273,8 +272,8 @@ namespace Cross_Docking
         private void ActualizarEjeCuadranteIDown(float angulo)
         {
             float interpolacion = Mathf.Abs(angulo) / 90f;
-            Vector3 vectorEjeX = new Vector3(90f, valorY, 0f);
-            Vector3 vectorEjeZ = new Vector3(0f, valorY, -90f);
+            Vector3 vectorEjeX = new Vector3(90f, 0f, 0f);
+            Vector3 vectorEjeZ = new Vector3(0f, 0f, -90f);
 
             Vector3 vectorFinal = Vector3.Lerp(vectorEjeX, vectorEjeZ, interpolacion);
             ejeRotacion = vectorFinal;
@@ -283,8 +282,8 @@ namespace Cross_Docking
         private void ActualizarEjeCuadranteIIDown(float angulo)
         {
             float interpolacion = Mathf.Abs(angulo) / 90f;
-            Vector3 vectorEjeX = new Vector3(90f, valorY, 0f);
-            Vector3 vectorEjeZ = new Vector3(0f, valorY, 90f);
+            Vector3 vectorEjeX = new Vector3(90f, 0f, 0f);
+            Vector3 vectorEjeZ = new Vector3(0f, 0f, 90f);
 
             Vector3 vectorFinal = Vector3.Lerp(vectorEjeX, vectorEjeZ, interpolacion);
             ejeRotacion = vectorFinal;
@@ -293,8 +292,8 @@ namespace Cross_Docking
         private void ActualizarEjeCuadranteIIIDown(float angulo)
         {
             float interpolacion = (Mathf.Abs(angulo) - 90f) / 90f;
-            Vector3 vectorEjeX = new Vector3(-90f, valorY, 0f);
-            Vector3 vectorEjeZ = new Vector3(0f, valorY, 90f);
+            Vector3 vectorEjeX = new Vector3(-90f, 0f, 0f);
+            Vector3 vectorEjeZ = new Vector3(0f, 0f, 90f);
 
             Vector3 vectorFinal = Vector3.Lerp(vectorEjeZ, vectorEjeX, interpolacion);
             ejeRotacion = vectorFinal;
@@ -303,8 +302,8 @@ namespace Cross_Docking
         private void ActualizarEjeCuadranteIVDown(float angulo)
         {
             float interpolacion = (Mathf.Abs(angulo) - 90f) / 90f;
-            Vector3 vectorEjeX = new Vector3(-90f, valorY, 0f);
-            Vector3 vectorEjeZ = new Vector3(0f, valorY, -90f);
+            Vector3 vectorEjeX = new Vector3(-90f, 0f, 0f);
+            Vector3 vectorEjeZ = new Vector3(0f, 0f, -90f);
 
             Vector3 vectorFinal = Vector3.Lerp(vectorEjeZ, vectorEjeX, interpolacion);
             ejeRotacion = vectorFinal;
