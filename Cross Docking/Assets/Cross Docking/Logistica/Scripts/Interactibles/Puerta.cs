@@ -20,14 +20,14 @@ namespace Cross_Docking
 
         public override void Iniciar(Transform mano)
         {
-            objetoDisponible = true;
+            objetoDisponible = false;
             this.mano = mano;
             actualizando = true;
         }
 
         public override void Detener()
         {
-            objetoDisponible = false;
+            objetoDisponible = true;
             miRigidbody.angularVelocity = -mano.GetComponent<ControladorInput>().Controller.angularVelocity;
             mano = null;
             actualizando = false;
