@@ -1,2 +1,2 @@
 # Cross-Docking
-Proyecto de realidad virtual de logística
+Proyecto de realidad virtual para estudiantes de logistica
